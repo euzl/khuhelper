@@ -10,4 +10,11 @@
 
     <dimen name="btn_bottom_margin_size">63dp</dimen>
     <dimen name="margin_size">30dp</dimen>
+
+    <dimen name="layout_search_side_margin_size">14dp</dimen>
+    <dimen name="layout_search_top_margin_size">13dp</dimen>
+    <dimen name="layout_search_height_size">55dp</dimen>
+    <dimen name="layout_search_font_size">18sp</dimen>
+
+    <dimen name="border_width">1dp</dimen>
 </resources>
