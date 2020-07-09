@@ -18,7 +18,7 @@
         app:srcCompat="@drawable/ic_face_black_24dp"
         tools:ignore="VectorDrawableCompat" />
 
-    <TextView
+    <Button
         android:id="@+id/btn_user_login"
         android:layout_width="@dimen/btn_login_width_size"
         android:layout_height="@dimen/btn_login_height_size"
@@ -32,7 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_login" />
 
-    <TextView
+    <Button
         android:id="@+id/btn_admin_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
