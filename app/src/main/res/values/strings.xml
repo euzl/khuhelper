@@ -3,4 +3,5 @@
     <string name="user_login">사용자 로그인</string>
     <string name="admin_login">관리자 로그인</string>
     <string name="search_ev_place">전기차 충전소 주소, 이름 검색</string>
+    <string name="search_btn">검    색</string>
 </resources>
