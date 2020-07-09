@@ -22,7 +22,7 @@
     <Button
         android:id="@+id/btn_user_login"
         android:layout_width="@dimen/btn_login_width_size"
-        android:layout_height="@dimen/btn_login_height_size"
+        android:layout_height="@dimen/btn_height_size"
         android:layout_marginTop="@dimen/margin_size"
         android:background="@drawable/bg_button"
         android:gravity="center"
