@@ -22,6 +22,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.btn_user_login:
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
                 break;
             case R.id.btn_admin_login:
                 // TODO: 09/07/2020 admin login 구현하고 연결
