@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="btn_login_width_size">205dp</dimen>
+    <dimen name="btn_login_height_size">51dp</dimen>
+    <dimen name="btn_font_size">20sp</dimen>
+
+    <dimen name="btn_padding_size">14dp</dimen>
+
+    <dimen name="img_login_size">90dp</dimen>
+
+    <dimen name="btn_bottom_margin_size">63dp</dimen>
+    <dimen name="margin_size">30dp</dimen>
+</resources>
