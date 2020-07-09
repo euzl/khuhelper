@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/btn_search_ev_place"
         android:layout_width="match_parent"
         android:layout_height="@dimen/layout_search_height_size"
         android:layout_marginTop="@dimen/layout_search_top_margin_size"
