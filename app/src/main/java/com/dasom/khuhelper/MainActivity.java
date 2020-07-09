@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         LinearLayout searchBtn = findViewById(R.id.btn_search_ev_place);
         searchBtn.setOnClickListener(this);
+        // TODO: 09/07/2020 지도api 연결 & 충전소 위치 띄우기 
     }
 
     @Override
