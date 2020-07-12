@@ -31,4 +31,9 @@
     <dimen name="detail_icon_top_margin_size">15dp</dimen>
     <dimen name="detail_icon_width_size">24dp</dimen>
     <dimen name="detail_font_size">14sp</dimen>
+
+    <dimen name="petition_icon_left_margin_size">50dp</dimen>
+    <dimen name="edt_petition_margin_size">40dp</dimen>
+    <dimen name="edt_petition_margin_top_size">20dp</dimen>
+    <dimen name="edt_petition_font_size">14sp</dimen>
 </resources>
