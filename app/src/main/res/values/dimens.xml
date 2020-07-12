@@ -21,4 +21,7 @@
     <dimen name="layout_top_height_size">66dp</dimen>
 
     <dimen name="border_width">1dp</dimen>
+
+    <dimen name="title_font_size">28sp</dimen>
+    <dimen name="title_margin_size">24dp</dimen>
 </resources>
