@@ -246,14 +246,14 @@
             android:text="주차비 10분 300"
             android:textColor="@color/lightBlack"
             android:textSize="@dimen/detail_font_size"
-            app:layout_constraintBottom_toTopOf="@+id/btn_search"
+            app:layout_constraintBottom_toTopOf="@+id/btn_petition_apply"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/iv_extra_info"
             app:layout_constraintTop_toBottomOf="@+id/line5" />
 
         <Button
-            android:id="@+id/btn_search"
+            android:id="@+id/btn_petition_apply"
             android:layout_width="@dimen/btn_width_size"
             android:layout_height="@dimen/btn_height_size"
             android:background="@drawable/bg_button"
