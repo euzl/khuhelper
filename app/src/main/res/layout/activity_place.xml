@@ -11,12 +11,12 @@
         android:id="@+id/btn_search_back"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginLeft="14dp"
         android:padding="@dimen/btn_back_padding_size"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toStartOf="@+id/edt_ev_search"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_back"
@@ -27,7 +27,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="@dimen/title_margin_size"
+        android:layout_marginVertical="@dimen/title_margin_size"
         android:background="@android:color/transparent"
         android:text="경희주차장"
         android:textColor="@color/white"
@@ -45,6 +45,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_ev_search">
 
+
+
         <Button
             android:id="@+id/btn_search"
             android:layout_width="@dimen/btn_width_size"
@@ -54,7 +56,7 @@
             android:text="@string/cp_apply_btn"
             android:textColor="@color/white"
             android:textSize="@dimen/btn_font_size"
-            android:layout_marginBottom="@dimen/btn_bottom_margin_size"
+            android:layout_marginBottom="@dimen/btn_submit_margin_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

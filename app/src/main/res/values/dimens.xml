@@ -11,6 +11,7 @@
     <dimen name="img_login_size">90dp</dimen>
 
     <dimen name="btn_bottom_margin_size">63dp</dimen>
+    <dimen name="btn_submit_margin_size">30dp</dimen>
     <dimen name="margin_size">30dp</dimen>
 
     <dimen name="layout_search_side_margin_size">14dp</dimen>
