@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorPrimary"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/btn_search_back"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginLeft="14dp"
+        android:padding="@dimen/btn_back_padding_size"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toStartOf="@+id/edt_ev_search"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back"
+        tools:ignore="VectorDrawableCompat" />
+
+    <TextView
+        android:id="@+id/edt_ev_search"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginVertical="@dimen/title_margin_size"
+        android:background="@android:color/transparent"
+        android:text="경희주차장"
+        android:textColor="@color/white"
+        android:textSize="@dimen/title_font_size"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_search_back"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_ev_search">
+
+        <ImageView
+            android:id="@+id/iv_oper_time"
+            android:layout_width="@dimen/detail_icon_width_size"
+            android:layout_height="@dimen/detail_icon_width_size"
+            android:layout_marginStart="@dimen/detail_icon_left_margin_size"
+            android:layout_marginLeft="@dimen/detail_icon_left_margin_size"
+            android:background="@drawable/ic_oper_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_oper_time" />
+
+        <TextView
+            android:id="@+id/tv_oper_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/detail_line_margin_size"
+            android:layout_marginTop="50dp"
+            android:text="10:00 ~ 24:00"
+            android:textColor="@color/lightBlack"
+            android:textSize="@dimen/detail_font_size"
+            app:layout_constraintBottom_toTopOf="@+id/line1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/iv_oper_time"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/detail_line_margin_size"
+            android:background="@color/lightGray"
+            app:layout_constraintBottom_toTopOf="@+id/tv_fast_charge"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_oper_time" />
+
+        <ImageView
+            android:id="@+id/iv_fast_charge"
+            android:layout_width="@dimen/detail_icon_width_size"
+            android:layout_height="30dp"
+            android:layout_marginStart="@dimen/detail_icon_left_margin_size"
+            android:layout_marginLeft="@dimen/detail_icon_left_margin_size"
+            android:background="@drawable/ic_fast_charge"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_fast_charge" />
+
+        <TextView
+            android:id="@+id/tv_fast_charge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/detail_line_margin_size"
+            android:text="급속 (50kW)"
+            android:textColor="@color/lightBlack"
+            android:textSize="@dimen/detail_font_size"
+            app:layout_constraintBottom_toTopOf="@+id/line2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/iv_fast_charge"
+            app:layout_constraintTop_toBottomOf="@+id/line1" />
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/detail_line_margin_size"
+            android:background="@color/lightGray"
+            app:layout_constraintBottom_toTopOf="@+id/tv_battery_type"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_fast_charge" />
+
+        <ImageView
+            android:id="@+id/iv_battery_type"
+            android:layout_width="@dimen/detail_icon_width_size"
+            android:layout_height="30dp"
+            android:layout_marginStart="@dimen/detail_icon_left_margin_size"
+            android:layout_marginLeft="@dimen/detail_icon_left_margin_size"
+            android:background="@drawable/ic_battery_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_battery_type" />
+
+        <TextView
+            android:id="@+id/tv_battery_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/detail_line_margin_size"
+            android:text="DC차데모 + AC3상"
+            android:textColor="@color/lightBlack"
+            android:textSize="@dimen/detail_font_size"
+            app:layout_constraintBottom_toTopOf="@+id/line3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/iv_battery_type"
+            app:layout_constraintTop_toBottomOf="@+id/line2" />
+
+        <View
+            android:id="@+id/line3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/detail_line_margin_size"
+            android:background="@color/lightGray"
+            app:layout_constraintBottom_toTopOf="@+id/tv_address"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_battery_type" />
+
+        <ImageView
+            android:id="@+id/iv_address"
+            android:layout_width="@dimen/detail_icon_width_size"
+            android:layout_height="30dp"
+            android:layout_marginStart="@dimen/detail_icon_left_margin_size"
+            android:layout_marginLeft="@dimen/detail_icon_left_margin_size"
+            android:background="@drawable/ic_address"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_address" />
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/detail_line_margin_size"
+            android:text="서울특별시 동대문구 이문로 136 , \n지하주차장 1층 D-04(이문동 292-10)"
+            android:textColor="@color/lightBlack"
+            android:textSize="@dimen/detail_font_size"
+            app:layout_constraintBottom_toTopOf="@+id/line4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/iv_address"
+            app:layout_constraintTop_toBottomOf="@+id/line3" />
+
+        <View
+            android:id="@+id/line4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/detail_line_margin_size"
+            android:background="@color/lightGray"
+            app:layout_constraintBottom_toTopOf="@+id/tv_sponse"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_address" />
+
+        <ImageView
+            android:id="@+id/iv_sponse"
+            android:layout_width="@dimen/detail_icon_width_size"
+            android:layout_height="30dp"
+            android:layout_marginStart="@dimen/detail_icon_left_margin_size"
+            android:layout_marginLeft="@dimen/detail_icon_left_margin_size"
+            android:background="@drawable/ic_sponse"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_sponse" />
+
+        <TextView
+            android:id="@+id/tv_sponse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/detail_line_margin_size"
+            android:text="환경부(한국자동차환경협회)"
+            android:textColor="@color/lightBlack"
+            android:textSize="@dimen/detail_font_size"
+            app:layout_constraintBottom_toTopOf="@+id/line5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/iv_sponse"
+            app:layout_constraintTop_toBottomOf="@+id/line4" />
+
+        <View
+            android:id="@+id/line5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/detail_line_margin_size"
+            android:background="@color/lightGray"
+            app:layout_constraintBottom_toTopOf="@+id/tv_extra_info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_sponse" />
+
+        <ImageView
+            android:id="@+id/iv_extra_info"
+            android:layout_width="@dimen/detail_icon_width_size"
+            android:layout_height="30dp"
+            android:layout_marginStart="@dimen/detail_icon_left_margin_size"
+            android:layout_marginLeft="@dimen/detail_icon_left_margin_size"
+            android:background="@drawable/ic_extra_info"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_extra_info" />
+
+        <TextView
+            android:id="@+id/tv_extra_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/detail_line_margin_size"
+            android:layout_marginBottom="114dp"
+            android:text="주차비 10분 300"
+            android:textColor="@color/lightBlack"
+            android:textSize="@dimen/detail_font_size"
+            app:layout_constraintBottom_toTopOf="@+id/btn_petition_apply"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/iv_extra_info"
+            app:layout_constraintTop_toBottomOf="@+id/line5" />
+
+        <Button
+            android:id="@+id/btn_petition_apply"
+            android:layout_width="@dimen/btn_width_size"
+            android:layout_height="@dimen/btn_height_size"
+            android:background="@drawable/bg_button"
+            android:gravity="center"
+            android:text="@string/cp_apply_btn"
+            android:textColor="@color/white"
+            android:textSize="@dimen/btn_font_size"
+            android:layout_marginBottom="@dimen/btn_submit_margin_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_extra_info" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

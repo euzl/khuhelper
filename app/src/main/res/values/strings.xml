@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">khuhelper</string>
+    <string name="user_login">사용자 로그인</string>
+    <string name="admin_login">관리자 로그인</string>
+    <string name="search_ev_place">전기차 충전소 주소, 이름 검색</string>
+    <string name="search_btn">검    색</string>
+    <string name="cp_receipt_btn">민 원 접 수</string>
+    <string name="cp_apply_btn">민 원 신 청</string>
+    <string name="cp_submit_success">민원 접수가 완료되었습니다.</string>
 </resources>
