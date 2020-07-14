@@ -33,7 +33,7 @@ public class PetitionActivity extends AppCompatActivity implements View.OnClickL
             case R.id.btn_petition_submit:
                 // TODO: 14/07/2020 DB에 관련 내용들이 저장되도록 구현
                 Toast.makeText(this.getApplicationContext(),R.string.cp_submit_success, Toast.LENGTH_SHORT).show();
-                finish()
+                finish();
                 break;
             case R.id.btn_search_back:
                 finish();
