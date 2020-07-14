@@ -2,6 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dasom.khuhelper">
 
+    <uses-permission android:name="android.permission.INTERNET">
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION">
+    </uses-permission>
+
+    <meta-data
+        android:name="com.kakao.sdk.AppKey"
+        android:value="589cb9e85b062d763feef79e05c544f1"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
