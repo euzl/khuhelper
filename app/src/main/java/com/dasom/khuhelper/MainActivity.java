@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import net.daum.mf.map.api.MapPOIItem;
+import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -28,6 +31,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
+
+        // 마커표시 테스트
+        MapPOIItem mapPOIItem = new MapPOIItem();
+        mapPOIItem.setItemName("서울시청");
+        mapPOIItem.setTag(0);
+        mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(37.5666805, 126.9784147));
+        mapPOIItem.setMarkerType(MapPOIItem.MarkerType.BluePin);
+        mapView.addPOIItem(mapPOIItem);
     }
 
     @Override
