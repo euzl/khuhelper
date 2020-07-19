@@ -3,12 +3,7 @@
     package="com.dasom.khuhelper">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-    <meta-data
-        android:name="com.kakao.sdk.AppKey"
-        android:value="589cb9e85b062d763feef79e05c544f1"/>
 
     <application
         android:allowBackup="true"
@@ -28,6 +23,10 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".PlaceActivity" />
         <activity android:name=".PetitionActivity" />
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="589cb9e85b062d763feef79e05c544f1"/>
     </application>
 
 </manifest>
