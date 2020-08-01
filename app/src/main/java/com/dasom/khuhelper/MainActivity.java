@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import net.daum.mf.map.api.MapPOIItem;
+import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -22,12 +25,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         LinearLayout searchBtn = findViewById(R.id.btn_search_ev_place);
         searchBtn.setOnClickListener(this);
-        // TODO: 09/07/2020 지도api 연결 & 충전소 위치 띄우기
+        // TODO: 09/07/2020 충전소 위치 띄우기
 
         MapView mapView = new MapView(this);
 
         ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
+
+        // 마커표시 테스트
+        MapPOIItem mapPOIItem = new MapPOIItem();
+        mapPOIItem.setItemName("서울시청");
+        mapPOIItem.setTag(0);
+        mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(37.5666805, 126.9784147));
+        mapPOIItem.setMarkerType(MapPOIItem.MarkerType.BluePin);
+        mapView.addPOIItem(mapPOIItem);
     }
 
     @Override
