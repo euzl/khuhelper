@@ -37,27 +37,47 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_centerInParent="true"
         android:background="@color/lightGray"
+        app:layout_constraintBottom_toTopOf="@id/layout_search_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_search_top"/>
+        app:layout_constraintTop_toBottomOf="@id/layout_search_top" />
 
-    <Button
-        android:id="@+id/btn_search"
-        android:layout_width="@dimen/btn_width_size"
-        android:layout_height="@dimen/btn_height_size"
-        android:background="@drawable/bg_button"
-        android:gravity="center"
-        android:text="@string/search_btn"
-        android:textColor="@color/white"
-        android:textSize="@dimen/btn_font_size"
+    <ScrollView
+        android:id="@+id/layout_search_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_search_top"
-        app:layout_constraintVertical_bias="0.07999998" />
+        app:layout_constraintTop_toBottomOf="@+id/view">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_result"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_search"
+                android:layout_width="@dimen/btn_width_size"
+                android:layout_height="@dimen/btn_height_size"
+                android:background="@drawable/bg_button"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="@string/search_btn"
+                android:textColor="@color/white"
+                android:textSize="@dimen/btn_font_size" />
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
