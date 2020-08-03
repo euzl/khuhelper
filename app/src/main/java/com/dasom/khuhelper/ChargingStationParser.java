@@ -1,6 +1,7 @@
 package com.dasom.khuhelper;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -8,11 +9,14 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class ChargingStationParser extends AsyncTask<String, Integer, String> {
 
     private String queryURL = "http://open.ev.or.kr:8080/openapi/services/rest/EvChargerService?"//요청 URL
             +"serviceKey=" + ServiceKey.key;
+
+    ArrayList<ChargingStation> csList = new ArrayList<>();
 
     @Override
     protected String doInBackground(String... strings) {
@@ -29,69 +33,46 @@ public class ChargingStationParser extends AsyncTask<String, Integer, String> {
             xpp.next();
             int eventType= xpp.getEventType();
 
+            ChargingStation chargingStation = new ChargingStation();
+
             while( eventType != XmlPullParser.END_DOCUMENT ){
                 switch( eventType ){
                     case XmlPullParser.START_DOCUMENT:
-                        buffer.append("파싱 시작...\n\n");
+                        Log.d("Parser", "파싱 시작");
+                        chargingStation = new ChargingStation();
                         break;
 
-                    case XmlPullParser.START_TAG:
-                        tag= xpp.getName();//태그 이름 얻어오기
+                    case XmlPullParser.START_TAG: // 태그 내용 chargingStation에 저장
+                        tag = xpp.getName(); //태그 이름 얻어오기
 
-                        if(tag.equals("item")) ;// 첫번째 검색결과
-                        else if(tag.equals("addr")){
-                            buffer.append("주소 : ");
-                            xpp.next();
-                            buffer.append(xpp.getText());//addr 요소의 TEXT 읽어와서 문자열버퍼에 추가
-                            buffer.append("\n"); //줄바꿈 문자 추가
-                        }
-                        else if(tag.equals("chargeType")){
-                            buffer.append("충전소타입 : ");
-                            xpp.next();
-                            buffer.append(xpp.getText());
-                            buffer.append("\n");
-                        }
+                        if(tag.equals("item")) ; // 첫번째 검색결과
                         else if(tag.equals("statId")){
-                            buffer.append("충전소ID :");
                             xpp.next();
-                            buffer.append(xpp.getText());//cpId
-                            buffer.append("\n");
+                            chargingStation.setStatId(Integer.parseInt(xpp.getText()));
                         }
                         else if(tag.equals("statNm")){
-                            buffer.append("충전소 명칭 :");
                             xpp.next();
-                            buffer.append(xpp.getText());//cpNm
-                            buffer.append("\n");
+                            chargingStation.setStatNm(xpp.getText());
                         }
-                        else if(tag.equals("stat")){
-                            buffer.append("충전기 상태 코드 :");
+                        else if(tag.equals("chgerType")){
                             xpp.next();
-                            buffer.append(xpp.getText());//
-                            buffer.append("\n");
+                            chargingStation.setChgerType(Integer.parseInt(xpp.getText()));
                         }
-                        else if(tag.equals("chgerId")){
-                            buffer.append("충전소 ID :");
+                        else if(tag.equals("addrDoro")){
                             xpp.next();
-                            buffer.append(xpp.getText());//csId
-                            buffer.append("\n");
+                            chargingStation.setAddrDoro(xpp.getText());
                         }
                         else if(tag.equals("lat")){
-                            buffer.append("위도 :");
                             xpp.next();
-                            buffer.append(xpp.getText());//
-                            buffer.append("\n");
+                            chargingStation.setLat(Integer.parseInt(xpp.getText()));
                         }
                         else if(tag.equals("lng")){
-                            buffer.append("경도 :");
                             xpp.next();
-                            buffer.append(xpp.getText());//
-                            buffer.append("\n");
+                            chargingStation.setLng(Integer.parseInt(xpp.getText()));
                         }
-                        else if(tag.equals("statUpdDt")){
-                            buffer.append("충전기상태갱신시각 :");
+                        else if(tag.equals("useTime")){
                             xpp.next();
-                            buffer.append(xpp.getText());//
-                            buffer.append("\n");
+                            chargingStation.setUseTime(xpp.getText());
                         }
                         break;
 
@@ -99,19 +80,16 @@ public class ChargingStationParser extends AsyncTask<String, Integer, String> {
                         break;
 
                     case XmlPullParser.END_TAG:
-                        tag= xpp.getName(); //태그 이름 얻어오기
-
-                        if(tag.equals("item")) buffer.append("\n");// 첫번째 검색결과종료..줄바꿈
-
+                        csList.add(chargingStation); // 리스트에 추가
                         break;
                 }
-
                 eventType= xpp.next();
             }
-
         } catch (Exception e) {
             // TODO Auto-generated catch blocke.printStackTrace();
         }
+
+        Log.d("Parser", "파싱 끝...");
 
         return null;
     }
