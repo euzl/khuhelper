@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -12,7 +13,15 @@ import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    LinearLayout searchBtn;
+    ViewGroup mapViewContainer;
+    MapView mapView;
+
+    ChargingStationParser chargingStationParser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,25 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         initView();
-    }
-
-    private void initView() {
-        LinearLayout searchBtn = findViewById(R.id.btn_search_ev_place);
-        searchBtn.setOnClickListener(this);
-        // TODO: 09/07/2020 충전소 위치 띄우기
-
-        MapView mapView = new MapView(this);
-
-        ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
-        mapViewContainer.addView(mapView);
-
-        // 마커표시 테스트
-        MapPOIItem mapPOIItem = new MapPOIItem();
-        mapPOIItem.setItemName("서울시청");
-        mapPOIItem.setTag(0);
-        mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(37.5666805, 126.9784147));
-        mapPOIItem.setMarkerType(MapPOIItem.MarkerType.BluePin);
-        mapView.addPOIItem(mapPOIItem);
+        parseChargingStation(); // 충전소 api 파싱
     }
 
     @Override
@@ -48,5 +39,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this, SearchActivity.class));
                 break;
         }
+    }
+
+    private void initView() {
+        // xml
+        searchBtn = findViewById(R.id.btn_search_ev_place);
+        mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
+
+        searchBtn.setOnClickListener(this);
+
+        // map view
+        mapView = new MapView(this);
+        mapViewContainer.addView(mapView);
+    }
+
+    private void parseChargingStation() {
+        // 충전소 파서 실행 (AsyncTask)
+        chargingStationParser = new ChargingStationParser(new ChargingStationParserCallBack() {
+            @Override
+            public void onSuccess(ArrayList<ChargingStation> chargingStations) {
+                markChargingStation(chargingStations);
+            }
+        });
+        chargingStationParser.execute();
+    }
+
+    private void markChargingStation(ArrayList<ChargingStation> chargingStations) {
+        MapPOIItem mapPOIItem;
+        Log.d("Mark Carging Station", "마커표시시작");
+        for (ChargingStation cs : chargingStations) {
+            mapPOIItem = new MapPOIItem();
+            mapPOIItem.setItemName(cs.getStatNm());
+//            mapPOIItem.setTag(cs.getStatId()); // 일단 생략..
+            mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(cs.getLat(), cs.getLng()));
+            mapPOIItem.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
+            mapPOIItem.setCustomImageResourceId(R.drawable.ic_ev_place); // 마커 이미지.
+            mapPOIItem.setCustomImageAutoscale(false); // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
+            mapPOIItem.setCustomImageAnchor(0.5f, 1.0f); // 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
+            mapView.addPOIItem(mapPOIItem);
+        }
+        // TODO: 05/08/2020 마커를 클릭하면 에러남 ㅠ  
     }
 }
