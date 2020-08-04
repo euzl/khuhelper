@@ -2,15 +2,15 @@ package com.dasom.khuhelper;
 
 public class ChargingStation {
 
-    private Integer statId; // 충전소ID (고유값)
+    private String statId; // 충전소ID (고유값)
     private String statNm; // 충전소 이름
-    private Integer chgerType; // 충전기 타입
+    private int chgerType; // 충전기 타입
     private String addrDoro; // 도로명주소
-    private Integer lat; // 위도
-    private Integer lng; // 경도
+    private Float lat; // 위도
+    private Float lng; // 경도
     private String useTime; // 이용시간
 
-    public void setStatId(Integer statId) {
+    public void setStatId(String statId) {
         this.statId = statId;
     }
 
@@ -18,7 +18,7 @@ public class ChargingStation {
         this.statNm = statNm;
     }
 
-    public void setChgerType(Integer chgerType) {
+    public void setChgerType(int chgerType) {
         this.chgerType = chgerType;
     }
 
@@ -26,11 +26,11 @@ public class ChargingStation {
         this.addrDoro = addrDoro;
     }
 
-    public void setLat(Integer lat) {
+    public void setLat(Float lat) {
         this.lat = lat;
     }
 
-    public void setLng(Integer lng) {
+    public void setLng(Float lng) {
         this.lng = lng;
     }
 
@@ -38,7 +38,7 @@ public class ChargingStation {
         this.useTime = useTime;
     }
 
-    public Integer getStatId() {
+    public String getStatId() {
         return statId;
     }
 
@@ -46,7 +46,7 @@ public class ChargingStation {
         return statNm;
     }
 
-    public Integer getChgerType() {
+    public int getChgerType() {
         return chgerType;
     }
 
@@ -54,11 +54,11 @@ public class ChargingStation {
         return addrDoro;
     }
 
-    public Integer getLat() {
+    public Float getLat() {
         return lat;
     }
 
-    public Integer getLng() {
+    public Float getLng() {
         return lng;
     }
 
