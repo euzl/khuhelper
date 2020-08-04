@@ -39,7 +39,7 @@ public class ChargingStationParser extends AsyncTask<String, Integer, String> {
                 switch( eventType ){
                     case XmlPullParser.START_DOCUMENT:
                         Log.d("Parser", "파싱 시작");
-                        chargingStation = new ChargingStation();
+                        chargingStation = new ChargingStation(); // 얘 위치가 어디가 적합할지 생각해보기
                         break;
 
                     case XmlPullParser.START_TAG: // 태그 내용 chargingStation에 저장
@@ -86,6 +86,7 @@ public class ChargingStationParser extends AsyncTask<String, Integer, String> {
                 eventType= xpp.next();
             }
         } catch (Exception e) {
+            System.err.println("There was an error: " + e.getCause() + " : " + e.getMessage());
             // TODO Auto-generated catch blocke.printStackTrace();
         }
 
