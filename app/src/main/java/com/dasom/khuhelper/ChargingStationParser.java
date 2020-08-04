@@ -51,7 +51,9 @@ public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
 
                     case XmlPullParser.START_TAG: // 태그 내용 chargingStation에 저장
                         tag = xpp.getName(); //태그 이름 얻어오기
-                        csList.add(setChargingStation());
+                        if (tag.equals("item")) {
+                            csList.add(setChargingStation());
+                        }
                         break;
 
                     case XmlPullParser.TEXT:
@@ -93,9 +95,7 @@ public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
                         isEndTag = false;
                         tag = xpp.getName(); //태그 이름 얻어오기
 
-                        if(tag.equals("item")) {
-                        }
-                        else if(tag.equals("statId")){
+                        if(tag.equals("statId")){
                             xpp.next();
                             tmpStation.setStatId(xpp.getText());
                         }
@@ -135,7 +135,6 @@ public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
         } catch (Exception e) {
             System.err.println("There was an error: " + e.getCause() + " : " + e.getMessage());
         }
-
         return tmpStation;
     }
 }
