@@ -1,4 +1,4 @@
-package com.dasom.khuhelper;
+package com.dasom.khuhelper.user;
 
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.dasom.khuhelper.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 

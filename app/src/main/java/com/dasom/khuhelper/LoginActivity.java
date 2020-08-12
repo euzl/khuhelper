@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.dasom.khuhelper.admin.OptimalPlaceActivity;
+import com.dasom.khuhelper.user.MainActivity;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -22,10 +25,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.btn_user_login:
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                finish();
+//                finish();
                 break;
             case R.id.btn_admin_login:
                 // TODO: 09/07/2020 admin login 구현하고 연결
+                startActivity(new Intent(LoginActivity.this, OptimalPlaceActivity.class));
+//                finish();
                 break;
         }
     }

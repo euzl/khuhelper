@@ -19,10 +19,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".PlaceActivity" />
-        <activity android:name=".PetitionActivity" />
+<!--        User-->
+        <activity android:name=".user.MainActivity" />
+        <activity android:name=".user.SearchActivity" />
+        <activity android:name=".user.PlaceActivity" />
+        <activity android:name=".user.PetitionActivity" />
+
+<!--        Admin-->
+        <activity android:name=".admin.OptimalPlaceActivity" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

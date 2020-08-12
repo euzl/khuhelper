@@ -1,7 +1,9 @@
-package com.dasom.khuhelper;
+package com.dasom.khuhelper.user;
 
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.dasom.khuhelper.ServiceKey;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
