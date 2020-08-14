@@ -68,11 +68,13 @@
 
             <Button
                 android:id="@+id/btn_search"
-                android:layout_width="@dimen/btn_width_size"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/btn_height_size"
                 android:background="@drawable/bg_button"
                 android:gravity="center"
+                android:layout_margin="@dimen/btn_margin_size"
                 android:layout_gravity="center"
+                android:foreground="?android:selectableItemBackground"
                 android:text="@string/search_btn"
                 android:textColor="@color/white"
                 android:textSize="@dimen/btn_font_size" />

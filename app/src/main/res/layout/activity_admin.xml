@@ -1,6 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="관리자 메뉴"
+        android:textColor="@color/black"
+        android:textSize="42sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.278"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.110000014" />
+
+    <Button
+        android:id="@+id/btn_menu_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_size"
+        android:background="@drawable/bg_menubutton"
+        android:gravity="center_vertical|left"
+        android:paddingLeft="30dp"
+        android:text="설치 최적지 분석"
+        android:textColor="@color/darkGray"
+        android:textSize="@dimen/noti_font_size"
+        android:foreground="?android:selectableItemBackground"
+        app:layout_constraintBottom_toTopOf="@+id/btn_menu_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/btn_menu_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_menubutton"
+        android:layout_marginTop="@dimen/btn_margin_size"
+        android:gravity="center_vertical|left"
+        android:paddingLeft="30dp"
+        android:text="충전소 사용량 예측"
+        android:textColor="@color/darkGray"
+        android:textSize="@dimen/noti_font_size"
+        android:foreground="?android:selectableItemBackground"
+        app:layout_constraintBottom_toTopOf="@+id/btn_menu_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_menu_1" />
+
+    <Button
+        android:id="@+id/btn_menu_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/btn_margin_size"
+        android:background="@drawable/bg_menubutton"
+        android:gravity="center_vertical|left"
+        android:paddingLeft="30dp"
+        android:text="민원 관리"
+        android:textColor="@color/darkGray"
+        android:textSize="@dimen/noti_font_size"
+        android:foreground="?android:selectableItemBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_menu_2" />
+
+    <TextView
+        android:id="@+id/tv_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그아웃"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/noti_font_size"
+        android:textStyle="bold"
+        android:padding="@dimen/btn_padding_size"
+        android:foreground="?android:selectableItemBackground"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,21 +1,18 @@
 package com.dasom.khuhelper.admin;
 
 import android.content.res.AssetManager;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.dasom.khuhelper.R;
-import com.dasom.khuhelper.user.ChargingStation;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
-import net.daum.mf.map.api.MapPolyline;
 import net.daum.mf.map.api.MapView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,12 +23,12 @@ import java.util.Iterator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class OptimalPlaceActivity extends AppCompatActivity {
+public class OptimalPlaceActivity extends AppCompatActivity implements View.OnClickListener {
 
     ViewGroup mapViewContainer;
     MapView mapView;
 
-    TextView testTv;
+    ImageView backBtn;
 
     ArrayList<AnalyzePlace> analyzePlaces = new ArrayList<>();
 
@@ -46,7 +43,8 @@ public class OptimalPlaceActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        testTv = findViewById(R.id.tv_parsingtest);
+        backBtn = findViewById(R.id.btn_optimal_back);
+        backBtn.setOnClickListener(this);
 
         mapViewContainer = findViewById(R.id.map_view);
         mapView = new MapView(this);
@@ -56,7 +54,7 @@ public class OptimalPlaceActivity extends AppCompatActivity {
     private void markRecommendPlace() {
         MapPOIItem mapPOIItem;
         Log.d("Mark Recommend Place", "마커표시시작 총 개수 - " + analyzePlaces.size());
-        for (int i=0; i<10000; i += 10) {
+        for (int i=0; i<1000; i += 15) {
             mapPOIItem = new MapPOIItem();
             mapPOIItem.setItemName(analyzePlaces.get(i).getKey());
             mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(analyzePlaces.get(i).getLat(), analyzePlaces.get(i).getLng()));
@@ -137,4 +135,12 @@ public class OptimalPlaceActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()) {
+            case R.id.btn_optimal_back:
+                finish();
+                break;
+        }
+    }
 }

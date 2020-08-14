@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.dasom.khuhelper.R;
 
@@ -40,6 +41,8 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_search_ev_place:
                 startActivity(new Intent(UserActivity.this, SearchActivity.class));
                 break;
+//            Toast.makeText(AdminActivity.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+
         }
     }
 

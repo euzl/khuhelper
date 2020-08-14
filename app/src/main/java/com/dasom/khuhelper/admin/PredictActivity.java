@@ -21,7 +21,7 @@ public class PredictActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_optimalplace);
+        setContentView(R.layout.activity_predict);
 
         initView();
     }
@@ -38,6 +38,13 @@ public class PredictActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.btn_predict_back:
+                finish();
+                break;
+            case R.id.btn_check:
+                // 어쩔까
+                break;
+        }
     }
 }

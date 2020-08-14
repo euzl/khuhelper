@@ -7,6 +7,7 @@
     <string name="cp_receipt_btn">민 원 접 수</string>
     <string name="cp_apply_btn">민 원 신 청</string>
     <string name="cp_submit_success">민원 접수가 완료되었습니다.</string>
+    <string name="optimal_title">최적지 분석</string>
     <string name="predict_title">예상 전기량 예측</string>
     <string name="predict_prev_message">자동차 대수를 입력하면\n분석해서 예상 전기량을 예측해 드립니다.</string>
 
