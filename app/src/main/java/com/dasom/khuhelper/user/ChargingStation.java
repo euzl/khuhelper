@@ -1,4 +1,4 @@
-package com.dasom.khuhelper;
+package com.dasom.khuhelper.user;
 
 public class ChargingStation {
 

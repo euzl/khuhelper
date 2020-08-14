@@ -1,4 +1,4 @@
-package com.dasom.khuhelper;
+package com.dasom.khuhelper.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import com.dasom.khuhelper.R;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
@@ -65,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void markChargingStation(ArrayList<ChargingStation> chargingStations) {
+        // TODO: 12/08/2020 이거도 비동기로 하면 좋을텐데 
         MapPOIItem mapPOIItem;
         Log.d("Mark Carging Station", "마커표시시작");
         for (ChargingStation cs : chargingStations) {
