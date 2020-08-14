@@ -3,139 +3,139 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/colorPrimary"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/btn_search_back"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginLeft="14dp"
-        android:padding="@dimen/btn_back_padding_size"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintEnd_toStartOf="@+id/edt_ev_search"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_back"
-        tools:ignore="VectorDrawableCompat" />
-
-    <TextView
-        android:id="@+id/edt_ev_search"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginVertical="@dimen/title_margin_size"
-        android:background="@android:color/transparent"
-        android:text="민원신청"
-        android:textColor="@color/white"
-        android:textSize="@dimen/title_font_size"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_search_back"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+    <LinearLayout
+        android:id="@+id/layout_petition_top"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/bg_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_ev_search">
+        android:layout_height="@dimen/layout_top_height_size"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/iv_petition_place"
+            android:id="@+id/btn_petition_back"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/detail_icon_width_size"
-            android:layout_marginStart="@dimen/petition_icon_left_margin_size"
-            android:layout_marginLeft="@dimen/petition_icon_left_margin_size"
-            android:adjustViewBounds="true"
-            android:src="@drawable/ic_ev_place"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_petition_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_petition_name" />
+            android:layout_height="match_parent"
+            android:padding="@dimen/btn_back_padding_size"
+            app:srcCompat="@drawable/ic_arrow_back"
+            tools:ignore="VectorDrawableCompat" />
 
         <TextView
-            android:id="@+id/tv_petition_name"
+            android:id="@+id/tv_petition_titile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/detail_line_margin_size"
-            android:layout_marginTop="50dp"
-            android:text="경희주차장"
-            android:textColor="@color/lightBlack"
-            android:textSize="@dimen/detail_font_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/iv_petition_place"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            android:text="민원신청"
+            android:textColor="@color/black"
+            android:textSize="@dimen/title_font_size"
+            android:layout_gravity="center" />
 
-        <EditText
-            android:id="@+id/edt_petition_user_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/edt_petition_margin_size"
-            android:layout_marginTop="@dimen/edt_petition_margin_top_size"
-            android:hint="이름"
-            android:textSize="@dimen/edt_petition_font_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_petition_name" />
+    </LinearLayout>
 
-        <EditText
-            android:id="@+id/edt_petition_user_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/edt_petition_margin_size"
-            android:layout_marginTop="@dimen/edt_petition_margin_top_size"
-            android:hint="이메일"
-            android:textSize="@dimen/edt_petition_font_size"
-            android:inputType="textEmailAddress"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edt_petition_user_name" />
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:background="@color/lightGray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_petition_top" />
 
-        <EditText
-            android:id="@+id/edt_petition_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/edt_petition_margin_size"
-            android:layout_marginTop="@dimen/edt_petition_margin_top_size"
-            android:hint="제목"
-            android:textSize="@dimen/edt_petition_font_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edt_petition_user_email" />
+    <ImageView
+        android:id="@+id/iv_petition_place"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/detail_icon_width_size"
+        android:layout_marginStart="@dimen/petition_icon_left_margin_size"
+        android:layout_marginLeft="@dimen/petition_icon_left_margin_size"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_ev_place"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_petition_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_petition_name" />
 
-        <EditText
-            android:id="@+id/edt_petition_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/edt_petition_margin_top_size"
-            android:layout_marginHorizontal="@dimen/edt_petition_margin_size"
-            android:hint="내용"
-            android:textSize="@dimen/edt_petition_font_size"
-            android:singleLine="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edt_petition_title" />
+    <TextView
+        android:id="@+id/tv_petition_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/detail_line_margin_size"
+        android:layout_marginTop="@dimen/margin_size"
+        android:text="경희주차장"
+        android:textColor="@color/lightBlack"
+        android:textSize="@dimen/detail_font_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/iv_petition_place"
+        app:layout_constraintTop_toBottomOf="@id/view"
+        app:layout_constraintVertical_bias="0.0" />
 
-        <Button
-            android:id="@+id/btn_petition_submit"
-            android:layout_width="@dimen/btn_width_size"
-            android:layout_height="@dimen/btn_height_size"
-            android:background="@drawable/bg_button"
-            android:gravity="center"
-            android:text="@string/cp_apply_btn"
-            android:textColor="@color/white"
-            android:textSize="@dimen/btn_font_size"
-            android:inputType="textEmailAddress"
-            android:layout_marginBottom="@dimen/btn_submit_margin_size"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+    <EditText
+        android:id="@+id/edt_petition_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/edt_petition_margin_size"
+        android:layout_marginTop="@dimen/edt_petition_margin_top_size"
+        android:hint="이름"
+        android:textSize="@dimen/edt_petition_font_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_petition_name" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:id="@+id/edt_petition_user_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/edt_petition_margin_size"
+        android:layout_marginTop="@dimen/edt_petition_margin_top_size"
+        android:hint="이메일"
+        android:textSize="@dimen/edt_petition_font_size"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_petition_user_name" />
+
+    <EditText
+        android:id="@+id/edt_petition_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/edt_petition_margin_size"
+        android:layout_marginTop="@dimen/edt_petition_margin_top_size"
+        android:hint="제목"
+        android:textSize="@dimen/edt_petition_font_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_petition_user_email" />
+
+    <EditText
+        android:id="@+id/edt_petition_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/edt_petition_margin_top_size"
+        android:layout_marginHorizontal="@dimen/edt_petition_margin_size"
+        android:hint="내용"
+        android:textSize="@dimen/edt_petition_font_size"
+        android:singleLine="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_petition_title" />
+
+    <Button
+        android:id="@+id/btn_petition_submit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height_size"
+        android:layout_margin="@dimen/btn_margin_size"
+        android:background="@drawable/bg_button"
+        android:gravity="center"
+        android:text="@string/cp_apply_btn"
+        android:textColor="@color/white"
+        android:textSize="@dimen/btn_font_size"
+        android:foreground="?android:selectableItemBackground"
+        android:layout_marginBottom="@dimen/btn_submit_margin_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

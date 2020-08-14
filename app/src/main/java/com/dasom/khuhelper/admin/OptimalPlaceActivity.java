@@ -1,21 +1,18 @@
 package com.dasom.khuhelper.admin;
 
 import android.content.res.AssetManager;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.dasom.khuhelper.R;
-import com.dasom.khuhelper.user.ChargingStation;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
-import net.daum.mf.map.api.MapPolyline;
 import net.daum.mf.map.api.MapView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,12 +23,12 @@ import java.util.Iterator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class OptimalPlaceActivity extends AppCompatActivity {
+public class OptimalPlaceActivity extends AppCompatActivity implements View.OnClickListener {
 
     ViewGroup mapViewContainer;
     MapView mapView;
 
-    TextView testTv;
+    ImageView backBtn;
 
     ArrayList<AnalyzePlace> analyzePlaces = new ArrayList<>();
 
@@ -46,7 +43,8 @@ public class OptimalPlaceActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        testTv = findViewById(R.id.tv_parsingtest);
+        backBtn = findViewById(R.id.btn_optimal_back);
+        backBtn.setOnClickListener(this);
 
         mapViewContainer = findViewById(R.id.map_view);
         mapView = new MapView(this);
@@ -55,24 +53,33 @@ public class OptimalPlaceActivity extends AppCompatActivity {
 
     private void markRecommendPlace() {
         MapPOIItem mapPOIItem;
-        Log.d("Mark Recommend Place", "마커표시시작");
-        int cnt = 1;
-        for (AnalyzePlace ap : analyzePlaces) {
-            if (cnt == 1000) break;
+        Log.d("Mark Recommend Place", "마커표시시작 총 개수 - " + analyzePlaces.size());
+        for (int i=0; i<1000; i += 15) {
             mapPOIItem = new MapPOIItem();
-            mapPOIItem.setItemName(ap.getKey());
-//            mapPOIItem.setTag(ap.getId()); // 일단 생략..
-            mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(ap.getLat(), ap.getLng()));
+            mapPOIItem.setItemName(analyzePlaces.get(i).getKey());
+            mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(analyzePlaces.get(i).getLat(), analyzePlaces.get(i).getLng()));
             mapPOIItem.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
-            mapPOIItem.setCustomImageResourceId(R.drawable.ic_recommend_place); // 마커 이미지.
+            mapPOIItem.setCustomImageResourceId(getMarkerColorId(analyzePlaces.get(i).getFinalPoint())); // 마커 이미지.
             mapPOIItem.setCustomImageAutoscale(false); // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
             mapPOIItem.setCustomImageAnchor(0.5f, 0.5f); // 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
             mapView.addPOIItem(mapPOIItem);
-            cnt++;
-            Log.d("marker", cnt + "개 찍는중");
         }
-        // TODO: 05/08/2020 마커를 클릭하면 에러남 ㅠ
     }
+
+    private int getMarkerColorId(double finalPoint) {
+        if (finalPoint >= 50) {
+            return R.drawable.ic_recommend_red;
+        } else if (finalPoint >= 40) {
+            return R.drawable.ic_recommend_orange;
+        } else if (finalPoint >= 30) {
+            return R.drawable.ic_recommend_yellow;
+        } else if (finalPoint >= 20) {
+            return R.drawable.ic_recommend_green;
+        } else {
+            return R.drawable.ic_recommned_sky;
+        }
+    }
+
 
     private void setAnalyzePlaces() {
         String json = getJonString();
@@ -128,4 +135,12 @@ public class OptimalPlaceActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()) {
+            case R.id.btn_optimal_back:
+                finish();
+                break;
+        }
+    }
 }

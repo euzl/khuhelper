@@ -5,12 +5,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.dasom.khuhelper.admin.AdminActivity;
 import com.dasom.khuhelper.admin.OptimalPlaceActivity;
-import com.dasom.khuhelper.user.MainActivity;
+import com.dasom.khuhelper.user.UserActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,13 +25,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_user_login:
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-//                finish();
+                startActivity(new Intent(MainActivity.this, UserActivity.class));
                 break;
             case R.id.btn_admin_login:
-                // TODO: 09/07/2020 admin login 구현하고 연결
-                startActivity(new Intent(LoginActivity.this, OptimalPlaceActivity.class));
-//                finish();
+                startActivity(new Intent(MainActivity.this, AdminActivity.class));
                 break;
         }
     }

@@ -1,4 +1,4 @@
-package com.dasom.khuhelper.user;
+package com.dasom.khuhelper.user.chargingstation;
 
 import android.os.AsyncTask;
 import android.util.Log;
