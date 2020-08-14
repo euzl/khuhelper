@@ -48,8 +48,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(AdminActivity.this, PredictActivity.class));
                 break;
             case R.id.btn_menu_3:
-                // TODO: 15/08/2020 민원관리액티비티연결
-//                startActivity(new Intent(AdminActivity.this, PredictActivity.class));
+                startActivity(new Intent(AdminActivity.this, ManageActivity.class));
                 break;
             case R.id.tv_logout:
                 Toast.makeText(AdminActivity.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();

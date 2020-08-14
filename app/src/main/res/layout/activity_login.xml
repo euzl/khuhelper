@@ -9,22 +9,26 @@
 
     <ImageView
         android:id="@+id/iv_login"
-        android:layout_width="@dimen/img_login_size"
-        android:layout_height="@dimen/img_login_size"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.39"
-        app:srcCompat="@drawable/ic_face_black_24dp"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintDimensionRatio="1"
+        app:srcCompat="@drawable/ic_login"
+        android:elevation="10dp"
         tools:ignore="VectorDrawableCompat" />
 
     <Button
         android:id="@+id/btn_user_login"
         android:layout_width="@dimen/btn_login_width_size"
-        android:layout_height="@dimen/btn_height_size"
+        android:layout_height="66dp"
         android:layout_marginTop="@dimen/margin_size"
-        android:background="@drawable/bg_button"
+        android:background="@drawable/bg_loginbutton"
+        android:elevation="10dp"
         android:gravity="center"
         android:text="@string/user_login"
         android:textColor="@color/white"

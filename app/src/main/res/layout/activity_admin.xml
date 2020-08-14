@@ -6,21 +6,29 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:elevation="10dp"
+        android:src="@drawable/ic_adminmenu"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/btn_menu_1" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="15dp"
         android:text="관리자 메뉴"
         android:textColor="@color/black"
-        android:textSize="42sp"
+        android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.278"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.110000014" />
+        app:layout_constraintVertical_bias="0.120000005" />
 
     <Button
         android:id="@+id/btn_menu_1"
@@ -77,7 +85,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="로그아웃"
-        android:textColor="@color/blue"
+        android:textColor="@color/gray"
         android:textSize="@dimen/noti_font_size"
         android:textStyle="bold"
         android:padding="@dimen/btn_padding_size"

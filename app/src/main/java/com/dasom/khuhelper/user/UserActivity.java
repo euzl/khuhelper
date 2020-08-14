@@ -8,9 +8,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.dasom.khuhelper.R;
+import com.dasom.khuhelper.user.chargingstation.ChargingStation;
+import com.dasom.khuhelper.user.chargingstation.ChargingStationParser;
+import com.dasom.khuhelper.user.chargingstation.ChargingStationParserCallBack;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
