@@ -2,8 +2,10 @@ package com.dasom.khuhelper.admin;
 
 public class AnalyzePlace {
     private int id; // 아이디
-    private double finalPoint; // 최종포인트(높을수록 추천)
-    private double[][] points;
+    private String key;
+    private double finalPoint;
+    private double lat;
+    private double lng;
 
     public int getId() {
         return id;
@@ -11,6 +13,14 @@ public class AnalyzePlace {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public double getFinalPoint() {
@@ -21,11 +31,19 @@ public class AnalyzePlace {
         this.finalPoint = finalPoint;
     }
 
-    public double[][] getPoints() {
-        return points;
+    public double getLat() {
+        return lat;
     }
 
-    public void setPoints(double[][] points) {
-        this.points = points;
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
     }
 }

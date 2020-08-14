@@ -3,11 +3,14 @@ package com.dasom.khuhelper.admin;
 import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dasom.khuhelper.R;
+import com.dasom.khuhelper.user.ChargingStation;
 
+import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapPolyline;
 import net.daum.mf.map.api.MapView;
@@ -19,6 +22,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,7 +42,7 @@ public class OptimalPlaceActivity extends AppCompatActivity {
 
         initView();
         setAnalyzePlaces();
-        setPolyLine();
+        markRecommendPlace();
     }
 
     private void initView() {
@@ -49,31 +53,37 @@ public class OptimalPlaceActivity extends AppCompatActivity {
         mapViewContainer.addView(mapView);
     }
 
-    private void setPolyLine() {
+    private void markRecommendPlace() {
+        MapPOIItem mapPOIItem;
+        Log.d("Mark Recommend Place", "마커표시시작");
+        int cnt = 1;
         for (AnalyzePlace ap : analyzePlaces) {
-            MapPolyline polyline = new MapPolyline();
-            polyline.setTag(ap.getId());
-            polyline.setLineColor(Color.argb(128, 255, 51, 0)); // Polyline 컬러 지정.
-
-            double[][] points = ap.getPoints();
-            for (int i=0; i<5; i++){
-                polyline.addPoint(MapPoint.mapPointWithGeoCoord(points[i][1], points[i][0]));
-            }
-            mapView.addPolyline(polyline);
+            if (cnt == 1000) break;
+            mapPOIItem = new MapPOIItem();
+            mapPOIItem.setItemName(ap.getKey());
+//            mapPOIItem.setTag(ap.getId()); // 일단 생략..
+            mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(ap.getLat(), ap.getLng()));
+            mapPOIItem.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
+            mapPOIItem.setCustomImageResourceId(R.drawable.ic_recommend_place); // 마커 이미지.
+            mapPOIItem.setCustomImageAutoscale(false); // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
+            mapPOIItem.setCustomImageAnchor(0.5f, 0.5f); // 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
+            mapView.addPOIItem(mapPOIItem);
+            cnt++;
+            Log.d("marker", cnt + "개 찍는중");
         }
+        // TODO: 05/08/2020 마커를 클릭하면 에러남 ㅠ
     }
 
     private void setAnalyzePlaces() {
         String json = getJonString();
         jsonParsing(json);
-//        testTv.setText(analyzePlaces.get(0).getId() + "\n" + analyzePlaces.get(0).getFinalPoint());
     }
 
     private String getJonString() {
         String json = "";
         AssetManager assetManager = getAssets();
         try {
-            InputStream is = assetManager.open("0811.json");
+            InputStream is = assetManager.open("0814.json");
             int fileSize = is.available();
 
             byte[] buffer = new byte[fileSize];
@@ -93,44 +103,26 @@ public class OptimalPlaceActivity extends AppCompatActivity {
     private void jsonParsing(String json)
     {
         try{
+            AnalyzePlace analyzePlace;
+
             JSONObject jsonObject = new JSONObject(json);
+            JSONObject finalPointObject = jsonObject.getJSONObject("Final_Point");
+            final Iterator<String> keys = finalPointObject.keys();
 
-            JSONArray featureArray = jsonObject.getJSONArray("features");
+            JSONObject lngObject = jsonObject.getJSONObject("Centroid_x");
+            JSONObject latObject = jsonObject.getJSONObject("Centroid_y");
 
-            for(int i=0; i<100; i++)
-//            for(int i=0; i<featureArray.length(); i++)
-            {
-                JSONObject featureObject = featureArray.getJSONObject(i);
-
-                AnalyzePlace analyzePlace = new AnalyzePlace();
-
-                analyzePlace.setId(featureObject.getInt("id"));
-
-                // sub json
-                String properties = featureObject.getString("properties");
-                JSONObject propertyObject = new JSONObject(properties);
-
-                analyzePlace.setFinalPoint(propertyObject.getDouble("Final_Point"));
-
-                // sub json
-                String geometry = featureObject.getString("geometry");
-                JSONObject geometryObject = new JSONObject(geometry);
-
-                // sub json 3층
-                JSONArray doubleArray = geometryObject.getJSONArray("coordinates");
-                JSONArray coordinateArray = doubleArray.getJSONArray(0);
-                double[][] coords = new double[5][];
-                for (int j = 0; j < 5; j++) {
-                    JSONArray xyArray = coordinateArray.getJSONArray(j);
-                    coords[j] = new double[2];
-                    for (int k = 0; k < 2; k++) {
-                        coords[j][k] = xyArray.getDouble(k);
-                    }
-                }
-                analyzePlace.setPoints(coords);
-
+            while(keys.hasNext()) {
+                analyzePlace = new AnalyzePlace();
+                String key = keys.next();
+                analyzePlace.setId(Integer.parseInt(key));
+                analyzePlace.setKey(key);
+                analyzePlace.setFinalPoint(finalPointObject.getDouble(key));
+                analyzePlace.setLat(latObject.getDouble(key));
+                analyzePlace.setLng(lngObject.getDouble(key));
                 analyzePlaces.add(analyzePlace);
             }
+
         }catch (JSONException e) {
             e.printStackTrace();
         }
