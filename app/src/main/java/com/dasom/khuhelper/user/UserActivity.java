@@ -8,12 +8,15 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dasom.khuhelper.R;
-import com.dasom.khuhelper.user.chargingstation.ChargingStation;
-import com.dasom.khuhelper.user.chargingstation.ChargingStationParser;
-import com.dasom.khuhelper.user.chargingstation.ChargingStationParserCallBack;
+import com.dasom.khuhelper.user.map.ChargingStation;
+import com.dasom.khuhelper.user.map.ChargingStationParser;
+import com.dasom.khuhelper.user.map.ChargingStationParserCallBack;
 
+import net.daum.mf.map.api.CalloutBalloonAdapter;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
@@ -37,13 +40,40 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         parseChargingStation(); // 충전소 api 파싱
     }
 
+    class CustomCalloutBalloonAdapter implements CalloutBalloonAdapter {
+        private final View mCalloutBalloon;
+
+        TextView nameTv;
+
+        public CustomCalloutBalloonAdapter() {
+            mCalloutBalloon = getLayoutInflater().inflate(R.layout.khuhelper_callout_ballon, null);
+        }
+
+        @Override
+        public View getCalloutBalloon(MapPOIItem poiItem) {
+            Intent intent = new Intent(UserActivity.this, PlaceActivity.class);
+            intent.putExtra("chargingStation", chargingStationParser.findStationByTag(poiItem.getTag()));
+            startActivity(intent);
+
+            nameTv = mCalloutBalloon.findViewById(R.id.tv_name);
+            nameTv.setText(poiItem.getItemName());
+
+            return mCalloutBalloon;
+        }
+
+        @Override
+        public View getPressedCalloutBalloon(MapPOIItem poiItem) {
+            return null;
+        }
+    }
+
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.btn_search_ev_place:
                 startActivity(new Intent(UserActivity.this, SearchActivity.class));
                 break;
-//            Toast.makeText(AdminActivity.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(UserActivity.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -51,13 +81,14 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         // xml
         searchBtn = findViewById(R.id.btn_search_ev_place);
-        mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
+        mapViewContainer = findViewById(R.id.map_view);
 
         searchBtn.setOnClickListener(this);
 
         // map view
         mapView = new MapView(this);
         mapViewContainer.addView(mapView);
+        mapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter());
     }
 
     private void parseChargingStation() {
@@ -72,13 +103,13 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void markChargingStation(ArrayList<ChargingStation> chargingStations) {
-        // TODO: 12/08/2020 이거도 비동기로 하면 좋을텐데 
         MapPOIItem mapPOIItem;
         Log.d("Mark Carging Station", "마커표시시작");
+        int tag=0;
         for (ChargingStation cs : chargingStations) {
             mapPOIItem = new MapPOIItem();
             mapPOIItem.setItemName(cs.getStatNm());
-//            mapPOIItem.setTag(cs.getStatId()); // 일단 생략..
+            mapPOIItem.setTag(tag++);
             mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(cs.getLat(), cs.getLng()));
             mapPOIItem.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
             mapPOIItem.setCustomImageResourceId(R.drawable.ic_ev_place); // 마커 이미지.
@@ -86,6 +117,5 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
             mapPOIItem.setCustomImageAnchor(0.5f, 1.0f); // 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
             mapView.addPOIItem(mapPOIItem);
         }
-        // TODO: 05/08/2020 마커를 클릭하면 에러남 ㅠ  
     }
 }

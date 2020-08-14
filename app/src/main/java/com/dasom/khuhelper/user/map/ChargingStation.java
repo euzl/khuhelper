@@ -1,10 +1,13 @@
-package com.dasom.khuhelper.user.chargingstation;
+package com.dasom.khuhelper.user.map;
 
-public class ChargingStation {
+import java.io.Serializable;
+
+public class ChargingStation implements Serializable {
 
     private String statId; // 충전소ID (고유값)
     private String statNm; // 충전소 이름
     private int chgerType; // 충전기 타입
+    private int stat; // 충전기상태
     private String addrDoro; // 도로명주소
     private Float lat; // 위도
     private Float lng; // 경도
@@ -64,5 +67,13 @@ public class ChargingStation {
 
     public String getUseTime() {
         return useTime;
+    }
+
+    public int getStat() {
+        return stat;
+    }
+
+    public void setStat(int stat) {
+        this.stat = stat;
     }
 }
