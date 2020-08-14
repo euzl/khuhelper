@@ -17,7 +17,7 @@ import net.daum.mf.map.api.MapView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class UserActivity extends AppCompatActivity implements View.OnClickListener {
 
     LinearLayout searchBtn;
     ViewGroup mapViewContainer;
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_user);
 
         initView();
         parseChargingStation(); // 충전소 api 파싱
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.btn_search_ev_place:
-                startActivity(new Intent(MainActivity.this, SearchActivity.class));
+                startActivity(new Intent(UserActivity.this, SearchActivity.class));
                 break;
         }
     }

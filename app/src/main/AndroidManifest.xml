@@ -12,21 +12,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity">
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/SplashTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" />
 <!--        User-->
-        <activity android:name=".user.MainActivity" />
+        <activity android:name=".user.UserActivity" />
         <activity android:name=".user.SearchActivity" />
         <activity android:name=".user.PlaceActivity" />
         <activity android:name=".user.PetitionActivity" />
 
 <!--        Admin-->
+        <activity android:name=".admin.AdminActivity" />
         <activity android:name=".admin.OptimalPlaceActivity" />
+        <activity android:name=".admin.PredictActivity" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
