@@ -1,4 +1,4 @@
-package com.dasom.khuhelper.user.chargingstation;
+package com.dasom.khuhelper.user.map;
 
 import java.util.ArrayList;
 

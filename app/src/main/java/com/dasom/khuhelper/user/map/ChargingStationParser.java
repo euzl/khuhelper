@@ -1,4 +1,4 @@
-package com.dasom.khuhelper.user.chargingstation;
+package com.dasom.khuhelper.user.map;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -32,6 +32,10 @@ public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
                 +"serviceKey=" + ServiceKey.key;
     }
 
+    public ChargingStation findStationByTag(int tag) {
+        return csList.get(tag);
+    }
+
     @Override
     protected Void doInBackground(Void... params) {
         try {
@@ -54,7 +58,10 @@ public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
                     case XmlPullParser.START_TAG: // 태그 내용 chargingStation에 저장
                         tag = xpp.getName(); //태그 이름 얻어오기
                         if (tag.equals("item")) {
-                            csList.add(setChargingStation());
+                            ChargingStation cs = setChargingStation();
+                            if (cs != null) {
+                                csList.add(cs);
+                            }
                         }
                         break;
 
@@ -109,8 +116,15 @@ public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
                             xpp.next();
                             tmpStation.setChgerType(Integer.parseInt(xpp.getText()));
                         }
+                        else if(tag.equals("stat")){
+                            xpp.next();
+                            tmpStation.setStat(Integer.parseInt(xpp.getText()));
+                        }
                         else if(tag.equals("addrDoro")){
                             xpp.next();
+                            if(!xpp.getText().contains("서울특별시")) {
+                                return null;
+                            }
                             tmpStation.setAddrDoro(xpp.getText());
                         }
                         else if(tag.equals("lat")){

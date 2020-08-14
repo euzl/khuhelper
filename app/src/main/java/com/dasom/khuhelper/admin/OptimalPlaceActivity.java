@@ -6,9 +6,13 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.dasom.khuhelper.R;
+import com.dasom.khuhelper.user.UserActivity;
+import com.dasom.khuhelper.user.map.ChargingStation;
 
+import net.daum.mf.map.api.CalloutBalloonAdapter;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
@@ -49,6 +53,8 @@ public class OptimalPlaceActivity extends AppCompatActivity implements View.OnCl
         mapViewContainer = findViewById(R.id.map_view);
         mapView = new MapView(this);
         mapViewContainer.addView(mapView);
+        mapView.setCalloutBalloonAdapter(new OptimalPlaceActivity.CustomCalloutBalloonAdapter());
+
     }
 
     private void markRecommendPlace() {
@@ -56,7 +62,7 @@ public class OptimalPlaceActivity extends AppCompatActivity implements View.OnCl
         Log.d("Mark Recommend Place", "마커표시시작 총 개수 - " + analyzePlaces.size());
         for (int i=0; i<1000; i += 15) {
             mapPOIItem = new MapPOIItem();
-            mapPOIItem.setItemName(analyzePlaces.get(i).getKey());
+            mapPOIItem.setItemName(analyzePlaces.get(i).getFinalPoint()+"");
             mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(analyzePlaces.get(i).getLat(), analyzePlaces.get(i).getLng()));
             mapPOIItem.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
             mapPOIItem.setCustomImageResourceId(getMarkerColorId(analyzePlaces.get(i).getFinalPoint())); // 마커 이미지.
@@ -141,6 +147,29 @@ public class OptimalPlaceActivity extends AppCompatActivity implements View.OnCl
             case R.id.btn_optimal_back:
                 finish();
                 break;
+        }
+    }
+
+    class CustomCalloutBalloonAdapter implements CalloutBalloonAdapter {
+        private final View mCalloutBalloon;
+
+        TextView nameTv;
+
+        public CustomCalloutBalloonAdapter() {
+            mCalloutBalloon = getLayoutInflater().inflate(R.layout.khuhelper_callout_ballon, null);
+        }
+
+        @Override
+        public View getCalloutBalloon(MapPOIItem poiItem) {
+            nameTv = mCalloutBalloon.findViewById(R.id.tv_name);
+            nameTv.setText("Final Point : " + poiItem.getItemName());
+
+            return mCalloutBalloon;
+        }
+
+        @Override
+        public View getPressedCalloutBalloon(MapPOIItem poiItem) {
+            return null;
         }
     }
 }
