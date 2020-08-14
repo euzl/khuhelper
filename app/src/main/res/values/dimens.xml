@@ -12,6 +12,7 @@
 
     <dimen name="btn_bottom_margin_size">63dp</dimen>
     <dimen name="btn_submit_margin_size">30dp</dimen>
+    <dimen name="btn_margin_size">20dp</dimen>
     <dimen name="margin_size">30dp</dimen>
 
     <dimen name="layout_search_side_margin_size">14dp</dimen>
@@ -19,12 +20,14 @@
     <dimen name="layout_search_height_size">55dp</dimen>
     <dimen name="layout_search_font_size">18sp</dimen>
 
-    <dimen name="layout_top_height_size">66dp</dimen>
+    <dimen name="layout_top_height_size">56dp</dimen>
 
     <dimen name="border_width">1dp</dimen>
 
-    <dimen name="title_font_size">28sp</dimen>
+    <dimen name="title_font_size">20sp</dimen>
     <dimen name="title_margin_size">24dp</dimen>
+
+    <dimen name="noti_font_size">16sp</dimen>
 
     <dimen name="detail_line_margin_size">20dp</dimen>
     <dimen name="detail_icon_left_margin_size">30dp</dimen>
