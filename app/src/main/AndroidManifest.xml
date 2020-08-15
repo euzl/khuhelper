@@ -31,7 +31,8 @@
 <!--        Admin-->
         <activity android:name=".admin.AdminActivity" />
         <activity android:name=".admin.OptimalPlaceActivity" />
-        <activity android:name=".admin.PredictActivity" />
+        <activity android:name=".admin.PredictActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".admin.ManageActivity" />
 
         <meta-data
