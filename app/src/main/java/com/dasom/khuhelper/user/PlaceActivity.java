@@ -57,8 +57,9 @@ public class PlaceActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.btn_petition_apply:
-                // TODO: 14/07/2020 아마도 그냥 액티비티를 시작하는 게 아니라, 현재 충전소의 이름(또는 아이디)를 같이 넘겨준다.
-                startActivity(new Intent(PlaceActivity.this, PetitionActivity.class));
+                Intent intent = new Intent(PlaceActivity.this, PetitionActivity.class);
+                intent.putExtra("chargingStation", chargingStation);
+                startActivity(intent);
                 break;
             case R.id.btn_search_back:
                 finish();
