@@ -5,8 +5,10 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dasom.khuhelper.Petition;
 import com.dasom.khuhelper.R;
@@ -63,9 +65,9 @@ public class ManageActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.layout_petition_data:
 //                finish();
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogStyle);
                 builder.setMessage("이름 : " + petition.getUsername() + " (" + petition.getUseremail() + ")\n"
-                        + "충전소 : " + petition.getCsName() + " (" + petition.getCsId() + ")\n"
+                        + "충전소 : " + petition.getCsName() + "\n충전소ID : " + petition.getCsId() + "\n\n"
                         + "제목 : " + petition.getTitle() +"\n"
                         + "내용 : " + petition.getContent())
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -75,6 +77,7 @@ public class ManageActivity extends AppCompatActivity implements View.OnClickLis
                                     dataLayout.setVisibility(View.GONE);
                                     manageNotiTv.setVisibility(View.VISIBLE);
                                 }
+                                Toast.makeText(ManageActivity.this, "확인했습니다.", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .setNegativeButton("취소", new DialogInterface.OnClickListener() {
