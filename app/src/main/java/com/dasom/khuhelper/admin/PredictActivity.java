@@ -1,6 +1,7 @@
 package com.dasom.khuhelper.admin;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -10,7 +11,18 @@ import android.widget.TextView;
 
 import com.dasom.khuhelper.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.Iterator;
+
 import androidx.appcompat.app.AppCompatActivity;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class PredictActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -21,10 +33,13 @@ public class PredictActivity extends AppCompatActivity implements View.OnClickLi
     EditText numberEdt;
     Button checkBtn;
 
+    String jsonResult;
+    int usage;
     private int carNumber; // 자동차 대수
-    private int usage; // 사용량
 
     boolean isResult = false;
+
+    InputMethodManager imm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +47,7 @@ public class PredictActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_predict);
 
         initView();
+
     }
 
     private void initView() {
@@ -42,12 +58,14 @@ public class PredictActivity extends AppCompatActivity implements View.OnClickLi
         numberEdt = findViewById(R.id.edt_number);
         checkBtn = findViewById(R.id.btn_check);
 
+        numberEdt.requestFocus();
+
         unitTv.setVisibility(View.GONE);
         predictBackBtn.setOnClickListener(this);
         checkBtn.setOnClickListener(this);
 
         // 키보드 올리기
-        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
     }
 
@@ -59,7 +77,9 @@ public class PredictActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.btn_check:
                 if(!isResult) {
-                    showResult();
+                    carNumber = Integer.parseInt(numberEdt.getText().toString());
+                    getResponse();
+                    showResult(usage);
                 } else {
                     finish();
                 }
@@ -67,10 +87,14 @@ public class PredictActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    private void setJsonResult(String jsonResult) {
+        usage = Integer.parseInt(jsonResult);
+    }
+
     /**
      * 동찬 결과 보여주는 함수
      */
-    private void showResult() {
+    private void showResult(int result) {
         // 키보드 내리기
         InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
@@ -80,18 +104,59 @@ public class PredictActivity extends AppCompatActivity implements View.OnClickLi
         StringBuilder notiMessage = new StringBuilder()
                 .append("분석결과 자동차가 ")
                 .append(carNumber)
-                .append("대일 때\n예상 전기량은 다음과 같습니다.");
+                .append(" 대일 때\n예상 전기량은 다음과 같습니다.");
         predictNotiTv.setText(notiMessage);
 
-        resultTv.setText(usage);
+        resultTv.setText(result + "\n");
         unitTv.setVisibility(View.VISIBLE);
 
         isResult = true;
     }
 
+    private void getResponse() {
+        jsonResult = null;
+
+        new Thread() {
+            public void run() {
+                OkHttpClient client = new OkHttpClient().newBuilder()
+                        .build();
+                MediaType mediaType = MediaType.parse("application/json");
+                RequestBody body = RequestBody.create(mediaType, "{\n    \"input\": \""+carNumber +"\"\n}");
+
+                Request request = new Request.Builder()
+                        .url("http://36bf91c03391.ngrok.io/api/responses")
+                        .method("POST", body)
+                        .addHeader("Content-Type", "application/json")
+                        .build();
+                try {
+                    Response response = client.newCall(request).execute();
+
+
+                    final JSONObject jsonObject  = new JSONObject(response.body().string());
+                    Log.d("please:", jsonObject + "");
+
+                    jsonResult = jsonObject.getString("predicted_value");
+                    Log.d("json result", jsonResult + "");
+
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                setJsonResult(jsonResult);
+            }
+        });
+    }
+
     public void finish() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+        if (!isResult) {
+            imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+        }
         super.finish();
     }
 }
