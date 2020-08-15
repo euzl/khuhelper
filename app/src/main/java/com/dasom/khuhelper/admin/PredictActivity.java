@@ -2,6 +2,7 @@ package com.dasom.khuhelper.admin;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -44,6 +45,10 @@ public class PredictActivity extends AppCompatActivity implements View.OnClickLi
         unitTv.setVisibility(View.GONE);
         predictBackBtn.setOnClickListener(this);
         checkBtn.setOnClickListener(this);
+
+        // 키보드 올리기
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
     }
 
     @Override
@@ -66,6 +71,10 @@ public class PredictActivity extends AppCompatActivity implements View.OnClickLi
      * 동찬 결과 보여주는 함수
      */
     private void showResult() {
+        // 키보드 내리기
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
         numberEdt.setVisibility(View.GONE);
 
         StringBuilder notiMessage = new StringBuilder()
@@ -78,5 +87,11 @@ public class PredictActivity extends AppCompatActivity implements View.OnClickLi
         unitTv.setVisibility(View.VISIBLE);
 
         isResult = true;
+    }
+
+    public void finish() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+        super.finish();
     }
 }
