@@ -4,9 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.dasom.khuhelper.admin.AdminActivity;
-import com.dasom.khuhelper.admin.OptimalPlaceActivity;
 import com.dasom.khuhelper.user.UserActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initView() {
         Button userLoginBtn = findViewById(R.id.btn_user_login);
-        Button adminLoginBtn = findViewById(R.id.btn_admin_login);
+        TextView adminLoginBtn = findViewById(R.id.btn_admin_login);
 
         userLoginBtn.setOnClickListener(this);
         adminLoginBtn.setOnClickListener(this);

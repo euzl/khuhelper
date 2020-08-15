@@ -200,7 +200,7 @@
         android:layout_margin="@dimen/btn_margin_size"
         android:background="@drawable/bg_button"
         android:gravity="center"
-        android:text="@string/cp_apply_btn"
+        android:text="@string/cp_receipt_btn"
         android:textColor="@color/white"
         android:textSize="@dimen/btn_font_size"
         android:foreground="?android:selectableItemBackground"

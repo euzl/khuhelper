@@ -61,7 +61,7 @@
         android:id="@+id/tv_petition_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/detail_line_margin_size"
+        android:layout_marginHorizontal="10dp"
         android:layout_marginTop="@dimen/margin_size"
         android:text="경희주차장"
         android:textColor="@color/lightBlack"
@@ -80,6 +80,7 @@
         android:layout_marginTop="@dimen/edt_petition_margin_top_size"
         android:hint="이름"
         android:textSize="@dimen/edt_petition_font_size"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_petition_name" />
@@ -105,6 +106,7 @@
         android:layout_marginTop="@dimen/edt_petition_margin_top_size"
         android:hint="제목"
         android:textSize="@dimen/edt_petition_font_size"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_petition_user_email" />
@@ -118,6 +120,7 @@
         android:hint="내용"
         android:textSize="@dimen/edt_petition_font_size"
         android:singleLine="false"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_petition_title" />
@@ -129,7 +132,7 @@
         android:layout_margin="@dimen/btn_margin_size"
         android:background="@drawable/bg_button"
         android:gravity="center"
-        android:text="@string/cp_apply_btn"
+        android:text="@string/cp_receipt_btn"
         android:textColor="@color/white"
         android:textSize="@dimen/btn_font_size"
         android:foreground="?android:selectableItemBackground"

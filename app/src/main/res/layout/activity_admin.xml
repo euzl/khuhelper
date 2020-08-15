@@ -11,6 +11,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:elevation="10dp"
+        android:layout_marginLeft="8dp"
         android:src="@drawable/ic_adminmenu"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/btn_menu_1" />
