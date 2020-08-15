@@ -1,5 +1,6 @@
 package com.dasom.khuhelper.admin;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 import com.dasom.khuhelper.R;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AdminActivity extends AppCompatActivity implements View.OnClickListener{
@@ -51,8 +53,20 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(AdminActivity.this, ManageActivity.class));
                 break;
             case R.id.tv_logout:
-                Toast.makeText(AdminActivity.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
-                finish();
+                AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogStyle);
+                builder.setMessage("로그아웃 하시겠습니까?")
+                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                finish();
+                                Toast.makeText(AdminActivity.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // 취소하면 남겨놓음
+                            }
+                        });
+                builder.show();
                 break;
         }
 

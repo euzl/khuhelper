@@ -1,7 +1,9 @@
 package com.dasom.khuhelper.user;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,12 +13,14 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dasom.khuhelper.R;
+import com.dasom.khuhelper.admin.AdminActivity;
 import com.dasom.khuhelper.user.map.ChargingStation;
 import com.dasom.khuhelper.user.map.ChargingStationParser;
 import com.dasom.khuhelper.user.map.ChargingStationParserCallBack;
@@ -34,6 +38,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
     MapView mapView;
     EditText searchEdt;
     ImageView backBtn;
+    ImageButton petitionBtn;
 
     boolean isSearchMode = false;
 
@@ -83,6 +88,8 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_user_back:
                 onBackButton();
                 break;
+            case R.id.btn_petition:
+                startActivity(new Intent(UserActivity.this, PetitionListActivity.class));
         }
     }
 
@@ -91,8 +98,10 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         mapViewContainer = findViewById(R.id.map_view);
         searchEdt = findViewById(R.id.edt_search);
         backBtn = findViewById(R.id.btn_user_back);
+        petitionBtn = findViewById(R.id.btn_petition);
 
         backBtn.setOnClickListener(this);
+        petitionBtn.setOnClickListener(this);
 
         // map view
         mapView = new MapView(this);
@@ -122,8 +131,20 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
             searchEdt.setHint(R.string.search_ev_place);
             isSearchMode = false;
         } else {
-            Toast.makeText(UserActivity.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
-            finish();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogStyle);
+            builder.setMessage("로그아웃 하시겠습니까?")
+                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                            Toast.makeText(UserActivity.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // 취소하면 남겨놓음
+                        }
+                    });
+            builder.show();
         }
     }
 

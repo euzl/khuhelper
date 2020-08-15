@@ -9,6 +9,8 @@ public class Petition {
     String csId; // 충전소 id
     String csName; // 충전소 이름
 
+    boolean isCheck;
+
     public Petition(String username, String useremail, String title, String content, String csId, String csName) {
         this.username = username;
         this.useremail = useremail;
@@ -16,6 +18,7 @@ public class Petition {
         this.content = content;
         this.csId = csId;
         this.csName = csName;
+        this.isCheck = false;
     }
 
     public String getUsername() {
@@ -64,5 +67,13 @@ public class Petition {
 
     public void setCsName(String csName) {
         this.csName = csName;
+    }
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
     }
 }
