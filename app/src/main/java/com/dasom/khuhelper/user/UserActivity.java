@@ -15,12 +15,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dasom.khuhelper.R;
-import com.dasom.khuhelper.admin.AdminActivity;
 import com.dasom.khuhelper.user.map.ChargingStation;
 import com.dasom.khuhelper.user.map.ChargingStationParser;
 import com.dasom.khuhelper.user.map.ChargingStationParserCallBack;

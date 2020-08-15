@@ -15,7 +15,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.Iterator;
 
 import androidx.appcompat.app.AppCompatActivity;
 import okhttp3.MediaType;

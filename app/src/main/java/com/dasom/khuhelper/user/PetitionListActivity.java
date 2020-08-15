@@ -10,11 +10,8 @@ import android.widget.Toast;
 
 import com.dasom.khuhelper.Petition;
 import com.dasom.khuhelper.R;
-import com.dasom.khuhelper.admin.ManageActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import org.w3c.dom.Text;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;

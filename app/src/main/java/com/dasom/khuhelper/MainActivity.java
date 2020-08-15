@@ -8,7 +8,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dasom.khuhelper.admin.AdminActivity;
-import com.dasom.khuhelper.admin.ManageActivity;
 import com.dasom.khuhelper.user.UserActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
