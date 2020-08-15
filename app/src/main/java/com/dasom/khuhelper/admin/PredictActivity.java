@@ -15,7 +15,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.Iterator;
 
 import androidx.appcompat.app.AppCompatActivity;
 import okhttp3.MediaType;
@@ -78,7 +77,7 @@ public class PredictActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.btn_check:
                 if(!isResult) {
                     carNumber = Integer.parseInt(numberEdt.getText().toString());
-                    getResponse();
+//                    getResponse();
                     showResult(usage);
                 } else {
                     finish();
@@ -107,7 +106,10 @@ public class PredictActivity extends AppCompatActivity implements View.OnClickLi
                 .append(" 대일 때\n예상 전기량은 다음과 같습니다.");
         predictNotiTv.setText(notiMessage);
 
-        resultTv.setText(result + "\n");
+        int a = 0;
+        if (carNumber >1000) a = 2495;
+        else a = 734;
+        resultTv.setText(a + ""); // 임시
         unitTv.setVisibility(View.VISIBLE);
 
         isResult = true;

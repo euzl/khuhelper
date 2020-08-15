@@ -10,8 +10,6 @@ import android.widget.TextView;
 import com.dasom.khuhelper.R;
 import com.dasom.khuhelper.user.map.ChargingStation;
 
-import org.w3c.dom.Text;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class PlaceActivity extends AppCompatActivity implements View.OnClickListener {

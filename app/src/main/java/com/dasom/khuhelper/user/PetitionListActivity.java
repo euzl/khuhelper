@@ -1,4 +1,4 @@
-package com.dasom.khuhelper.admin;
+package com.dasom.khuhelper.user;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -17,7 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-public class ManageActivity extends AppCompatActivity implements View.OnClickListener {
+public class PetitionListActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageView manageBackBtn;
     TextView manageNotiTv;
@@ -36,6 +36,8 @@ public class ManageActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void initView() {
+        TextView titleTv = findViewById(R.id.tv_manage_title);
+        titleTv.setText("민원확인");
         manageBackBtn = findViewById(R.id.btn_manage_back);
         manageNotiTv = findViewById(R.id.tv_manage_noti);
         dataLayout = findViewById(R.id.layout_petition_data);
@@ -43,11 +45,14 @@ public class ManageActivity extends AppCompatActivity implements View.OnClickLis
 
         manageBackBtn.setOnClickListener(this);
 
-        // data가 있을 때(확인 안했을 경우만) / 없을 때
-        if (openData() || petition.isCheck() == false) {
+        // data가 있을 때 / 없을 때
+        if (openData()) {
             manageNotiTv.setVisibility(View.GONE);
             dataLayout.setVisibility(View.VISIBLE);
             previewTv.setText(petition.getUsername() + " : " + petition.getTitle() + "\n\n(" + petition.getCsName() + ")");
+            if (petition.isCheck()) {
+                previewTv.setTextColor(getApplicationContext().getResources().getColor(R.color.blue));
+            }
             dataLayout.setOnClickListener(this);
         } else {
             dataLayout.setVisibility(View.GONE);
@@ -63,23 +68,28 @@ public class ManageActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.layout_petition_data:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogStyle);
-                builder.setMessage("이름 : " + petition.getUsername() + " (" + petition.getUseremail() + ")\n"
-                        + "충전소 : " + petition.getCsName() + "\n충전소ID : " + petition.getCsId() + "\n\n"
+                if(petition.isCheck()) {
+                    builder.setTitle("처리된 민원입니다.");
+                } else {
+                    builder.setTitle("대기중인 민원입니다.");
+                }
+                builder.setMessage("충전소 : " + petition.getCsName() + "\n충전소ID : " + petition.getCsId() + "\n\n"
                         + "제목 : " + petition.getTitle() +"\n"
                         + "내용 : " + petition.getContent())
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                // 아무 일도 일어나지 않음
+                            }
+                        })
+                        .setNegativeButton("삭제", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // 취소하면 남겨놓음
                                 if (removeData()) {
                                     // 확인하면 리스트에서 지운다.
                                     dataLayout.setVisibility(View.GONE);
                                     manageNotiTv.setVisibility(View.VISIBLE);
                                 }
-                                Toast.makeText(ManageActivity.this, "민원이 처리되었습니다.", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .setNegativeButton("다음에 확인", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // 취소하면 남겨놓음
+                                Toast.makeText(PetitionListActivity.this, "삭제되었습니다", Toast.LENGTH_SHORT).show();
                             }
                         });
                 builder.show();
@@ -100,25 +110,9 @@ public class ManageActivity extends AppCompatActivity implements View.OnClickLis
 
     private boolean removeData() {
         // 지우기
-//        SharedPreferences sp = getSharedPreferences("shared", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sp.edit();
-//        editor.remove("petition").commit();
-
-        petition.setCheck(true);
-        saveData();
-        return true;
-    }
-
-    private void saveData() {
-        // Gson 인스턴스 생성
-        Gson gson = new GsonBuilder().create();
-        // JSON 으로 변환
-        String strPetition = gson.toJson(petition, Petition.class);
-
-        // sharedpreference에 저장
         SharedPreferences sp = getSharedPreferences("shared", MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString("petition", strPetition);
-        editor.commit();
+        editor.remove("petition").commit();
+        return true;
     }
 }

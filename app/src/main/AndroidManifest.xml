@@ -25,9 +25,9 @@
         <activity android:name=".MainActivity" />
 <!--        User-->
         <activity android:name=".user.UserActivity" />
-        <activity android:name=".user.SearchActivity" />
         <activity android:name=".user.PlaceActivity" />
         <activity android:name=".user.PetitionActivity" />
+        <activity android:name=".user.PetitionListActivity" />
 
 <!--        Admin-->
         <activity android:name=".admin.AdminActivity" />

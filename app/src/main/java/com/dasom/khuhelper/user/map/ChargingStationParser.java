@@ -36,6 +36,24 @@ public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
         return csList.get(tag);
     }
 
+    /**
+     * name이 주소나 이름에 포함된 리스트 반환
+     *
+     * @param name
+     * @return
+     */
+    public ArrayList<ChargingStation> getStationByName(String name) {
+        ArrayList<ChargingStation> findList = new ArrayList<>();
+
+        for (ChargingStation cs : csList) {
+            if (cs.getStatNm().contains(name) || cs.getAddrDoro().contains(name)) {
+                findList.add(cs);
+            }
+        }
+
+        return findList;
+    }
+
     @Override
     protected Void doInBackground(Void... params) {
         try {

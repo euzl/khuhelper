@@ -1,13 +1,20 @@
 package com.dasom.khuhelper.user;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,9 +32,15 @@ import java.util.ArrayList;
 
 public class UserActivity extends AppCompatActivity implements View.OnClickListener {
 
-    LinearLayout searchBtn;
     ViewGroup mapViewContainer;
     MapView mapView;
+    EditText searchEdt;
+    ImageView backBtn;
+    ImageButton petitionBtn;
+
+    boolean isSearchMode = false;
+
+    InputMethodManager imm;
 
     ChargingStationParser chargingStationParser;
 
@@ -70,20 +83,23 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
-            case R.id.btn_search_ev_place:
-                startActivity(new Intent(UserActivity.this, SearchActivity.class));
+            case R.id.btn_user_back:
+                onBackButton();
                 break;
-//            Toast.makeText(UserActivity.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
-
+            case R.id.btn_petition:
+                startActivity(new Intent(UserActivity.this, PetitionListActivity.class));
         }
     }
 
     private void initView() {
         // xml
-        searchBtn = findViewById(R.id.btn_search_ev_place);
         mapViewContainer = findViewById(R.id.map_view);
+        searchEdt = findViewById(R.id.edt_search);
+        backBtn = findViewById(R.id.btn_user_back);
+        petitionBtn = findViewById(R.id.btn_petition);
 
-        searchBtn.setOnClickListener(this);
+        backBtn.setOnClickListener(this);
+        petitionBtn.setOnClickListener(this);
 
         // map view
         mapView = new MapView(this);
@@ -91,6 +107,61 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         mapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter());
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(37.518469, 126.988232), 5, false);
 
+        searchEdt.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        searchEdt.setOnEditorActionListener(new TextView.OnEditorActionListener()
+        {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
+            {
+                if(actionId == EditorInfo.IME_ACTION_DONE)
+                {
+                    searchPlace(searchEdt.getText().toString());
+                    isSearchMode = true;
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
+    private void onBackButton() {
+        if (isSearchMode) {
+            searchEdt.setHint(R.string.search_ev_place);
+            isSearchMode = false;
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogStyle);
+            builder.setMessage("로그아웃 하시겠습니까?")
+                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                            Toast.makeText(UserActivity.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // 취소하면 남겨놓음
+                        }
+                    });
+            builder.show();
+        }
+    }
+
+    /**
+     * name이 해당되는 충전소 마커로 표시
+     *
+     * @param name
+     */
+    private void searchPlace(String name) {
+        imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
+        mapView.removeAllPOIItems();
+        markChargingStation(chargingStationParser.getStationByName(name));
+        StringBuilder builder = new StringBuilder()
+                .append(name)
+                .append("(와)과 관련된 충전소가 표시되었습니다.");
+        Toast.makeText(UserActivity.this, builder, Toast.LENGTH_SHORT).show();
+        mapView.fitMapViewAreaToShowAllPOIItems();
     }
 
     private void parseChargingStation() {
