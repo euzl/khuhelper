@@ -49,7 +49,9 @@ public class OptimalPlaceActivity extends AppCompatActivity implements View.OnCl
 
         initView();
         setAnalyzePlaces();
-        markRecommendPlace(0, 1000, 15);
+        markRecommendPlace(0, 426, 10);
+        markRecommendPlace(426,5000,13);
+        markRecommendPlace(5000, 29339, 100);
     }
 
     private void initView() {
@@ -57,11 +59,17 @@ public class OptimalPlaceActivity extends AppCompatActivity implements View.OnCl
         backBtn.setOnClickListener(this);
 
         all = findViewById(R.id.layout_all);
-        red = findViewById(R.id.layout_orange);
+        red = findViewById(R.id.layout_red);
         orange = findViewById(R.id.layout_orange);
         yellow = findViewById(R.id.layout_yellow);
         green = findViewById(R.id.layout_green);
         sky = findViewById(R.id.layout_sky);
+        all.setOnClickListener(this);
+        red.setOnClickListener(this);
+        orange.setOnClickListener(this);
+        yellow.setOnClickListener(this);
+        green.setOnClickListener(this);
+        sky.setOnClickListener(this);
 
         mapViewContainer = findViewById(R.id.map_view);
         mapView = new MapView(this);
@@ -137,26 +145,16 @@ public class OptimalPlaceActivity extends AppCompatActivity implements View.OnCl
             JSONObject lngObject = jsonObject.getJSONObject("Centroid_x");
             JSONObject latObject = jsonObject.getJSONObject("Centroid_y");
 
-            int cnt=0;
-            ArrayList<Integer> list = new ArrayList<>();
             while(keys.hasNext()) {
-//                analyzePlace = new AnalyzePlace();
+                analyzePlace = new AnalyzePlace();
                 String key = keys.next();
-//                analyzePlace.setId(Integer.parseInt(key));
-//                analyzePlace.setKey(key);
-//                analyzePlace.setFinalPoint(finalPointObject.getDouble(key));
-//                analyzePlace.setLat(latObject.getDouble(key));
-//                analyzePlace.setLng(lngObject.getDouble(key));
-//                analyzePlaces.add(analyzePlace);
-                if (key == "3342") {
-                    list.add(cnt);
-                } else if (key =="4776") {
-                    list.add(cnt);                }else if (key =="22463") {
-                    list.add(cnt);                }else if (key =="7768") {
-                    list.add(cnt);                }
-                cnt++;
+                analyzePlace.setId(Integer.parseInt(key));
+                analyzePlace.setKey(key);
+                analyzePlace.setFinalPoint(finalPointObject.getDouble(key));
+                analyzePlace.setLat(latObject.getDouble(key));
+                analyzePlace.setLng(lngObject.getDouble(key));
+                analyzePlaces.add(analyzePlace);
             }
-            Log.d("OptimalPlace", cnt+"gㅡㅁ냐리");
         }catch (JSONException e) {
             e.printStackTrace();
         }
@@ -169,17 +167,29 @@ public class OptimalPlaceActivity extends AppCompatActivity implements View.OnCl
                 finish();
                 break;
             case R.id.layout_all:
-//                markRecommendPlace();
+                mapView.removeAllPOIItems();
+                markRecommendPlace(0, 5000, 10);
+                markRecommendPlace(5000, 29339, 100);
                 break;
             case R.id.layout_red:
+                mapView.removeAllPOIItems();
+                markRecommendPlace(0,426,5);
                 break;
             case R.id.layout_orange:
+                mapView.removeAllPOIItems();
+                markRecommendPlace(426, 3768, 50);
                 break;
             case R.id.layout_yellow:
+                mapView.removeAllPOIItems();
+                markRecommendPlace(3768, 11483, 50);
                 break;
             case R.id.layout_green:
+                mapView.removeAllPOIItems();
+                markRecommendPlace(11483, 20285, 50);
                 break;
             case R.id.layout_sky:
+                mapView.removeAllPOIItems();
+                markRecommendPlace(20285, 29339, 50);
                 break;
         }
     }
