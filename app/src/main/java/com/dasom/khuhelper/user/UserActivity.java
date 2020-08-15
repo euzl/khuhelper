@@ -89,6 +89,8 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         mapView = new MapView(this);
         mapViewContainer.addView(mapView);
         mapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter());
+        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(37.518469, 126.988232), 5, false);
+
     }
 
     private void parseChargingStation() {

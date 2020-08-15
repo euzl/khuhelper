@@ -6,11 +6,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dasom.khuhelper.R;
-import com.dasom.khuhelper.user.UserActivity;
-import com.dasom.khuhelper.user.map.ChargingStation;
 
 import net.daum.mf.map.api.CalloutBalloonAdapter;
 import net.daum.mf.map.api.MapPOIItem;
@@ -34,6 +33,13 @@ public class OptimalPlaceActivity extends AppCompatActivity implements View.OnCl
 
     ImageView backBtn;
 
+    LinearLayout all;
+    LinearLayout red;
+    LinearLayout orange;
+    LinearLayout yellow;
+    LinearLayout green;
+    LinearLayout sky;
+
     ArrayList<AnalyzePlace> analyzePlaces = new ArrayList<>();
 
     @Override
@@ -43,24 +49,39 @@ public class OptimalPlaceActivity extends AppCompatActivity implements View.OnCl
 
         initView();
         setAnalyzePlaces();
-        markRecommendPlace();
+        markRecommendPlace(0, 426, 10);
+        markRecommendPlace(426,5000,13);
+        markRecommendPlace(5000, 29339, 100);
     }
 
     private void initView() {
         backBtn = findViewById(R.id.btn_optimal_back);
         backBtn.setOnClickListener(this);
 
+        all = findViewById(R.id.layout_all);
+        red = findViewById(R.id.layout_red);
+        orange = findViewById(R.id.layout_orange);
+        yellow = findViewById(R.id.layout_yellow);
+        green = findViewById(R.id.layout_green);
+        sky = findViewById(R.id.layout_sky);
+        all.setOnClickListener(this);
+        red.setOnClickListener(this);
+        orange.setOnClickListener(this);
+        yellow.setOnClickListener(this);
+        green.setOnClickListener(this);
+        sky.setOnClickListener(this);
+
         mapViewContainer = findViewById(R.id.map_view);
         mapView = new MapView(this);
         mapViewContainer.addView(mapView);
         mapView.setCalloutBalloonAdapter(new OptimalPlaceActivity.CustomCalloutBalloonAdapter());
-
+        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(37.518469, 126.988232), 5, false);
     }
 
-    private void markRecommendPlace() {
+    private void markRecommendPlace(int first, int last, int term) {
         MapPOIItem mapPOIItem;
         Log.d("Mark Recommend Place", "마커표시시작 총 개수 - " + analyzePlaces.size());
-        for (int i=0; i<1000; i += 15) {
+        for (int i=first; i<last; i += term) {
             mapPOIItem = new MapPOIItem();
             mapPOIItem.setItemName(analyzePlaces.get(i).getFinalPoint()+"");
             mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(analyzePlaces.get(i).getLat(), analyzePlaces.get(i).getLng()));
@@ -85,7 +106,6 @@ public class OptimalPlaceActivity extends AppCompatActivity implements View.OnCl
             return R.drawable.ic_recommned_sky;
         }
     }
-
 
     private void setAnalyzePlaces() {
         String json = getJonString();
@@ -135,7 +155,6 @@ public class OptimalPlaceActivity extends AppCompatActivity implements View.OnCl
                 analyzePlace.setLng(lngObject.getDouble(key));
                 analyzePlaces.add(analyzePlace);
             }
-
         }catch (JSONException e) {
             e.printStackTrace();
         }
@@ -146,6 +165,31 @@ public class OptimalPlaceActivity extends AppCompatActivity implements View.OnCl
         switch(v.getId()) {
             case R.id.btn_optimal_back:
                 finish();
+                break;
+            case R.id.layout_all:
+                mapView.removeAllPOIItems();
+                markRecommendPlace(0, 5000, 10);
+                markRecommendPlace(5000, 29339, 100);
+                break;
+            case R.id.layout_red:
+                mapView.removeAllPOIItems();
+                markRecommendPlace(0,426,5);
+                break;
+            case R.id.layout_orange:
+                mapView.removeAllPOIItems();
+                markRecommendPlace(426, 3768, 50);
+                break;
+            case R.id.layout_yellow:
+                mapView.removeAllPOIItems();
+                markRecommendPlace(3768, 11483, 50);
+                break;
+            case R.id.layout_green:
+                mapView.removeAllPOIItems();
+                markRecommendPlace(11483, 20285, 50);
+                break;
+            case R.id.layout_sky:
+                mapView.removeAllPOIItems();
+                markRecommendPlace(20285, 29339, 50);
                 break;
         }
     }
