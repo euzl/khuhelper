@@ -68,14 +68,17 @@ public class PetitionListActivity extends AppCompatActivity implements View.OnCl
                 break;
             case R.id.layout_petition_data:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogStyle);
+                StringBuilder stringBuilder = new StringBuilder()
+                        .append("충전소 : " + petition.getCsName() + "\n충전소ID : " + petition.getCsId() + "\n\n"
+                                + "제목 : " + petition.getTitle() +"\n"
+                                + "내용 : " + petition.getContent());
                 if(petition.isCheck()) {
                     builder.setTitle("처리된 민원입니다.");
+                    stringBuilder.append("\n\n답변 : " + petition.getReply());
                 } else {
                     builder.setTitle("대기중인 민원입니다.");
                 }
-                builder.setMessage("충전소 : " + petition.getCsName() + "\n충전소ID : " + petition.getCsId() + "\n\n"
-                        + "제목 : " + petition.getTitle() +"\n"
-                        + "내용 : " + petition.getContent())
+                builder.setMessage(stringBuilder)
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 // 아무 일도 일어나지 않음
