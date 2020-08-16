@@ -107,7 +107,7 @@ public class PredictActivity extends AppCompatActivity implements View.OnClickLi
         predictNotiTv.setText(notiMessage);
 
         int a = 0;
-        if (carNumber >1000) a = 2495;
+        if (carNumber >10000) a = 29880;
         else a = 734;
         resultTv.setText(a + ""); // 임시
         unitTv.setVisibility(View.VISIBLE);

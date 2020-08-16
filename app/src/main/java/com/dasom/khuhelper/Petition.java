@@ -1,6 +1,8 @@
 package com.dasom.khuhelper;
 
-public class Petition {
+import java.io.Serializable;
+
+public class Petition implements Serializable {
     String username;
     String useremail;
     String title;
@@ -8,6 +10,7 @@ public class Petition {
 
     String csId; // 충전소 id
     String csName; // 충전소 이름
+    String reply; // 관리자 답변
 
     boolean isCheck;
 
@@ -19,6 +22,7 @@ public class Petition {
         this.csId = csId;
         this.csName = csName;
         this.isCheck = false;
+        this.reply = "";
     }
 
     public String getUsername() {
@@ -75,5 +79,13 @@ public class Petition {
 
     public void setCheck(boolean check) {
         isCheck = check;
+    }
+
+    public String getReply() {
+        return reply;
+    }
+
+    public void setReply(String reply) {
+        this.reply = reply;
     }
 }

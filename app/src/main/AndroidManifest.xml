@@ -35,6 +35,7 @@
         <activity android:name=".admin.PredictActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".admin.ManageActivity" />
+        <activity android:name=".admin.ReplyActivity" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
