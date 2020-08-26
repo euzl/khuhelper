@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="DialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@drawable/bg_dialog</item>
+        <item name="android:fontFamily">@font/khuhelper_font_family</item>
+        <item name="android:lineSpacingMultiplier">1.3</item>
+        <item name="colorControlActivated">@color/colorPrimaryDark</item>
+        <item name="android:paddingHorizontal">10dp</item>
+    </style>
+</resources>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/layout_optimalplace_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_top_height_size"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btn_optimal_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="@dimen/btn_back_padding_size"
+            app:srcCompat="@drawable/ic_arrow_back"
+            tools:ignore="VectorDrawableCompat" />
+
+        <TextView
+            android:id="@+id/tv_optimal_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/optimal_title"
+            android:textColor="@color/black"
+            android:textSize="@dimen/title_font_size"
+            android:layout_gravity="center" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:background="@color/lightGray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_optimalplace_top" />
+
+    <RelativeLayout
+        android:id="@+id/map_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view" />
+
+    <LinearLayout
+        android:id="@+id/layout_all"
+        android:layout_width="0dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_map_button"
+        android:orientation="horizontal"
+        android:foreground="?android:selectableItemBackground"
+        app:layout_constraintEnd_toStartOf="@+id/layout_red"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view"
+        app:layout_constraintWidth_percent="0.15">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="ALL" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_red"
+        android:layout_width="0dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_map_button"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:foreground="?android:selectableItemBackground"
+        app:layout_constraintEnd_toStartOf="@+id/layout_orange"
+        app:layout_constraintStart_toEndOf="@id/layout_all"
+        app:layout_constraintTop_toBottomOf="@id/view"
+        app:layout_constraintWidth_percent="0.15">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_recommend_red" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:text="50" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_orange"
+        android:layout_width="0dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_map_button"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:foreground="?android:selectableItemBackground"
+        app:layout_constraintEnd_toStartOf="@+id/layout_yellow"
+        app:layout_constraintStart_toEndOf="@id/layout_red"
+        app:layout_constraintTop_toBottomOf="@id/view"
+        app:layout_constraintWidth_percent="0.15">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_recommend_orange" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:text="40" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_yellow"
+        android:layout_width="0dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:background="@drawable/bg_map_button"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:foreground="?android:selectableItemBackground"
+        app:layout_constraintEnd_toStartOf="@+id/layout_green"
+        app:layout_constraintStart_toEndOf="@id/layout_orange"
+        app:layout_constraintTop_toBottomOf="@id/view"
+        app:layout_constraintWidth_percent="0.15">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_recommend_yellow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:text="30" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_green"
+        android:layout_width="0dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/bg_map_button"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:foreground="?android:selectableItemBackground"
+        app:layout_constraintEnd_toStartOf="@+id/layout_sky"
+        app:layout_constraintStart_toEndOf="@id/layout_yellow"
+        app:layout_constraintTop_toBottomOf="@id/view"
+        app:layout_constraintWidth_percent="0.15">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_recommend_green" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:text="20" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_sky"
+        android:layout_width="0dp"
+        android:layout_height="28dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:foreground="?android:selectableItemBackground"
+        android:background="@drawable/bg_map_button"
+        app:layout_constraintWidth_percent="0.15"
+        app:layout_constraintStart_toEndOf="@id/layout_green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_recommned_sky"
+            android:layout_gravity="center" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/layout_petition_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_top_height_size"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btn_petition_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="@dimen/btn_back_padding_size"
+            app:srcCompat="@drawable/ic_arrow_back"
+            tools:ignore="VectorDrawableCompat" />
+
+        <TextView
+            android:id="@+id/tv_petition_titile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="민원신청"
+            android:textColor="@color/black"
+            android:textSize="@dimen/title_font_size"
+            android:layout_gravity="center" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:background="@color/lightGray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_petition_top" />
+
+    <ImageView
+        android:id="@+id/iv_petition_place"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/detail_icon_width_size"
+        android:layout_marginStart="@dimen/petition_icon_left_margin_size"
+        android:layout_marginLeft="@dimen/petition_icon_left_margin_size"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_ev_place"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_petition_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_petition_name" />
+
+    <TextView
+        android:id="@+id/tv_petition_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="@dimen/margin_size"
+        android:text="경희주차장"
+        android:textColor="@color/lightBlack"
+        android:textSize="@dimen/detail_font_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/iv_petition_place"
+        app:layout_constraintTop_toBottomOf="@id/view"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/edt_petition_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/edt_petition_margin_size"
+        android:layout_marginTop="@dimen/edt_petition_margin_top_size"
+        android:hint="이름"
+        android:textSize="@dimen/edt_petition_font_size"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_petition_name" />
+
+    <EditText
+        android:id="@+id/edt_petition_user_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/edt_petition_margin_size"
+        android:layout_marginTop="@dimen/edt_petition_margin_top_size"
+        android:hint="이메일"
+        android:textSize="@dimen/edt_petition_font_size"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_petition_user_name" />
+
+    <EditText
+        android:id="@+id/edt_petition_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/edt_petition_margin_size"
+        android:layout_marginTop="@dimen/edt_petition_margin_top_size"
+        android:hint="제목"
+        android:textSize="@dimen/edt_petition_font_size"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_petition_user_email" />
+
+    <EditText
+        android:id="@+id/edt_petition_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/edt_petition_margin_top_size"
+        android:layout_marginHorizontal="@dimen/edt_petition_margin_size"
+        android:hint="내용"
+        android:textSize="@dimen/edt_petition_font_size"
+        android:singleLine="false"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_petition_title" />
+
+    <Button
+        android:id="@+id/btn_petition_submit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height_size"
+        android:layout_margin="@dimen/btn_margin_size"
+        android:background="@drawable/bg_button"
+        android:gravity="center"
+        android:text="@string/cp_receipt_btn"
+        android:textColor="@color/white"
+        android:textSize="@dimen/btn_font_size"
+        android:foreground="?android:selectableItemBackground"
+        android:layout_marginBottom="@dimen/btn_submit_margin_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
