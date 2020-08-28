@@ -49,8 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_size"
-        android:foreground="?android:selectableItemBackground"
-        android:background="@drawable/bg_menubutton"
+        android:background="@drawable/bg_menubutton_ripple"
         app:layout_constraintTop_toBottomOf="@+id/view"
         tools:layout_editor_absoluteX="30dp">
 
