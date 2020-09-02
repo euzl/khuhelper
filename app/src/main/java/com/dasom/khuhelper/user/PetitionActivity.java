@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.dasom.khuhelper.Petition;
 import com.dasom.khuhelper.R;
 import com.dasom.khuhelper.user.map.ChargingStation;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -92,7 +94,8 @@ public class PetitionActivity extends AppCompatActivity implements View.OnClickL
         petition = new Petition(usernameEdt.getText().toString(), useremailEdt.getText().toString(),
                 titleEdt.getText().toString(), contentEdt.getText().toString(),
                 chargingStation.getStatId(), chargingStation.getStatNm());
-        saveData();
+//        saveData();
+        saveFirebase();
 
         Toast.makeText(this.getApplicationContext(),R.string.cp_submit_success, Toast.LENGTH_SHORT).show();
         finish();
@@ -109,5 +112,10 @@ public class PetitionActivity extends AppCompatActivity implements View.OnClickL
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("petition", strPetition);
         editor.commit();
+    }
+
+    private void saveFirebase() {
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        database.child("petition").push().setValue(petition);
     }
 }
