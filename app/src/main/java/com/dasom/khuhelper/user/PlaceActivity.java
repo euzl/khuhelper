@@ -55,7 +55,7 @@ public class PlaceActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.btn_petition_apply:
-                Intent intent = new Intent(PlaceActivity.this, PetitionActivity.class);
+                Intent intent = new Intent(PlaceActivity.this, PetitionApplyActivity.class);
                 intent.putExtra("chargingStation", chargingStation);
                 startActivity(intent);
                 break;

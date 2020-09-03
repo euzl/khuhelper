@@ -87,7 +87,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
                 onBackButton();
                 break;
             case R.id.btn_petition:
-                startActivity(new Intent(UserActivity.this, PetitionListActivity.class));
+                startActivity(new Intent(UserActivity.this, PetitionComfirmActivity.class));
         }
     }
 

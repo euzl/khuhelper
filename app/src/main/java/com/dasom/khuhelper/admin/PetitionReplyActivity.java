@@ -12,14 +12,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dasom.khuhelper.Petition;
 import com.dasom.khuhelper.R;
+import com.dasom.khuhelper.petition.Petition;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ReplyActivity extends AppCompatActivity implements View.OnClickListener {
+public class PetitionReplyActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button replySubmitBtn;
     ImageView backBtn;
@@ -34,7 +34,7 @@ public class ReplyActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_petition);
+        setContentView(R.layout.activity_petitionreply);
 
         // 데이터 수신
         Intent intent = getIntent();

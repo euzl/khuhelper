@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dasom.khuhelper.Petition;
+import com.dasom.khuhelper.petition.Petition;
 import com.dasom.khuhelper.R;
 import com.dasom.khuhelper.user.map.ChargingStation;
 import com.google.firebase.database.DatabaseReference;
@@ -22,7 +22,7 @@ import com.google.gson.GsonBuilder;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class PetitionActivity extends AppCompatActivity implements View.OnClickListener {
+public class PetitionApplyActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView nameTv;
     Button petitionSubmitBtn;
@@ -38,7 +38,7 @@ public class PetitionActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_petition);
+        setContentView(R.layout.activity_petitionapply);
 
         // 데이터 수신
         Intent intent = getIntent();
@@ -90,7 +90,7 @@ public class PetitionActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void submitPetition() {
-        // TODO: 14/07/2020 DB에 관련 내용들이 저장되도록 구현
+        // TODO: 04/09/2020 테스트끝나면 기존 saveData() 삭제 
         petition = new Petition(usernameEdt.getText().toString(), useremailEdt.getText().toString(),
                 titleEdt.getText().toString(), contentEdt.getText().toString(),
                 chargingStation.getStatId(), chargingStation.getStatNm());
