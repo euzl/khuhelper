@@ -3,6 +3,9 @@ package com.dasom.khuhelper.petition;
 import java.io.Serializable;
 
 public class Petition implements Serializable {
+
+    String key;
+
     String username;
     String useremail;
     String title;
@@ -14,6 +17,8 @@ public class Petition implements Serializable {
 
     boolean isCheck;
 
+    public Petition(){}
+
     public Petition(String username, String useremail, String title, String content, String csId, String csName) {
         this.username = username;
         this.useremail = useremail;
@@ -23,6 +28,14 @@ public class Petition implements Serializable {
         this.csName = csName;
         this.isCheck = false;
         this.reply = "";
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getUsername() {

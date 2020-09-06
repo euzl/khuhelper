@@ -1,6 +1,5 @@
 package com.dasom.khuhelper.admin;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,11 +8,15 @@ import android.widget.TextView;
 import com.dasom.khuhelper.R;
 import com.dasom.khuhelper.petition.Petition;
 import com.dasom.khuhelper.petition.PetitionAdapter;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,31 +47,25 @@ public class PetitionManageActivity extends AppCompatActivity implements View.On
 
         manageBackBtn.setOnClickListener(this);
 
+        linearLayoutManager = new LinearLayoutManager(this);
+        petitionAdapter = new PetitionAdapter(this, petitionList);
+
         // TODO: 04/09/2020 비동기로 리스트 다 가져온 다음에 실행하기
         // data가 있을 때(확인 안했을 경우만) / 없을 때
         if (openData()) {
             manageNotiTv.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
             recyclerView.setOnClickListener(this);
-
-            // LinearLayout 사용
-            linearLayoutManager = new LinearLayoutManager(this);
-            recyclerView.setLayoutManager(linearLayoutManager);
-
-            // adapter객체 생성해서 리사이클러뷰에 적용
-            petitionAdapter = new PetitionAdapter(this, petitionList);
-            recyclerView.setAdapter(petitionAdapter);
-
-
-//            // 체크했으면 글씨 파란색으로 바꾸는 부분
-//            if (petition.isCheck()) {
-//                previewTv.setTextColor(getApplicationContext().getResources().getColor(R.color.blue));
-//            }
         } else {
             recyclerView.setVisibility(View.GONE);
             manageNotiTv.setVisibility(View.VISIBLE);
         }
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // TODO: 07/09/2020 민원확인하면 바로 파란색글씨로 변하도록
     }
 
     @Override
@@ -80,33 +77,30 @@ public class PetitionManageActivity extends AppCompatActivity implements View.On
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        setCheck();
-    }
-
     private boolean openData() {
         // TODO: 04/09/2020 petition 리스트 비동기로 불러오기
-        SharedPreferences sp = getSharedPreferences("shared", MODE_PRIVATE);
-        String strPetition = sp.getString("petition", "");
-        if (strPetition == "") {
-            return false;
-        }
-        Gson gson = new GsonBuilder().create();
-        Petition petition = gson.fromJson(strPetition, Petition.class);
-        petitionList.add(petition); // 일단 얘라도 넣자
-        petitionList.add(new Petition("dd","d","d","d","d","d"));
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("petition");
+
+        //Read from the database (message 아래의 child의 이벤트 수신)
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Petition petition = data.getValue(Petition.class);
+                    petition.setKey(data.getKey());
+                    petitionList.add(petition);
+                }
+
+                // LinearLayout 사용
+                recyclerView.setLayoutManager(linearLayoutManager);
+                recyclerView.setAdapter(petitionAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         return true;
     }
-
-    // 확인했으면 색 변하는 것
-//    private void setCheck() {
-//        if (openData()) {
-//            if (petition.isCheck()) {
-//                previewTv.setTextColor(getApplicationContext().getResources().getColor(R.color.blue));
-//            }
-//        }
-//    }
-
 }

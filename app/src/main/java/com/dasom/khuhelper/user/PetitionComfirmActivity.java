@@ -1,22 +1,23 @@
 package com.dasom.khuhelper.user;
 
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dasom.khuhelper.petition.Petition;
 import com.dasom.khuhelper.R;
 import com.dasom.khuhelper.petition.PetitionAdapter;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import androidx.appcompat.app.AlertDialog;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -57,17 +58,8 @@ public class PetitionComfirmActivity extends AppCompatActivity implements View.O
 
             // LinearLayout 사용
             linearLayoutManager = new LinearLayoutManager(this);
-            recyclerView.setLayoutManager(linearLayoutManager);
-
-            // adapter객체 생성해서 리사이클러뷰에 적용
+            // adapter객체 생성
             petitionAdapter = new PetitionAdapter(this, petitionList);
-            recyclerView.setAdapter(petitionAdapter);
-
-
-//            // 체크했으면 글씨 파란색으로 바꾸는 부분
-//            if (petition.isCheck()) {
-//                previewTv.setTextColor(getApplicationContext().getResources().getColor(R.color.blue));
-//            }
         } else {
             recyclerView.setVisibility(View.GONE);
             manageNotiTv.setVisibility(View.VISIBLE);
@@ -111,23 +103,36 @@ public class PetitionComfirmActivity extends AppCompatActivity implements View.O
 //                        });
 //                builder.show();
 //                break;
+            // TODO: 07/09/2020 사용자용 액티비티에서 확인하고 삭제 가능하게 변경
         }
     }
 
     private boolean openData() {
         // TODO: 04/09/2020 petition 리스트 비동기로 불러오기
-        SharedPreferences sp = getSharedPreferences("shared", MODE_PRIVATE);
-        String strPetition = sp.getString("petition", "");
-        if (strPetition == "") {
-            return false;
-        }
-        Gson gson = new GsonBuilder().create();
-        Petition petition = gson.fromJson(strPetition, Petition.class);
-        petitionList.add(petition); // 일단 얘라도 넣자
-        petitionList.add(new Petition("dd","d","d","d","d","d"));
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("petition");
+
+        //Read from the database (message 아래의 child의 이벤트 수신)
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    petitionList.add(data.getValue(Petition.class));
+                }
+
+                // LinearLayout 사용
+                recyclerView.setLayoutManager(linearLayoutManager);
+                recyclerView.setAdapter(petitionAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         return true;
     }
 
+    // 원래는 목록에서 지우는 기능 제공
     private boolean removeData() {
         // 지우기
         SharedPreferences sp = getSharedPreferences("shared", MODE_PRIVATE);

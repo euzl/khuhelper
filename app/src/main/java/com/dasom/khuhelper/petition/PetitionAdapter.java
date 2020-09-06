@@ -51,6 +51,10 @@ public class PetitionAdapter extends RecyclerView.Adapter<PetitionAdapter.Petiti
         holder.titleTextView.setText(petition.getTitle());
         holder.placeTextView.setText("(" + petition.getCsName() + ")");
 
+        if (petition.isCheck()) {
+            holder.titleTextView.setTextColor(holder.itemView.getResources().getColor(R.color.blue));
+        }
+
         // TODO: 04/09/2020 사용자가 확인할 때는 다른 액티비티로 이동하거나 다이얼로그가 떠야 한다. 따라서 리스너를 사용하던가 어댑터를 또 만들던가... 해야된다.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,9 +83,12 @@ public class PetitionAdapter extends RecyclerView.Adapter<PetitionAdapter.Petiti
 
         TextView titleTextView;
         TextView placeTextView;
+        View itemView;
 
         public PetitionViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            this.itemView = itemView;
 
             titleTextView = itemView.findViewById(R.id.tv_petition_title);
             placeTextView = itemView.findViewById(R.id.tv_petition_place);
