@@ -26,16 +26,16 @@
 <!--        User-->
         <activity android:name=".user.UserActivity" />
         <activity android:name=".user.PlaceActivity" />
-        <activity android:name=".user.PetitionActivity" />
-        <activity android:name=".user.PetitionListActivity" />
+        <activity android:name=".user.PetitionApplyActivity" />
+        <activity android:name=".user.PetitionComfirmActivity" />
 
 <!--        Admin-->
         <activity android:name=".admin.AdminActivity" />
         <activity android:name=".admin.OptimalPlaceActivity" />
         <activity android:name=".admin.PredictActivity"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".admin.ManageActivity" />
-        <activity android:name=".admin.ReplyActivity" />
+        <activity android:name=".admin.PetitionManageActivity" />
+        <activity android:name=".admin.PetitionReplyActivity" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

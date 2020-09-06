@@ -50,7 +50,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(AdminActivity.this, PredictActivity.class));
                 break;
             case R.id.btn_menu_3:
-                startActivity(new Intent(AdminActivity.this, ManageActivity.class));
+                startActivity(new Intent(AdminActivity.this, PetitionManageActivity.class));
                 break;
             case R.id.tv_logout:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogStyle);
