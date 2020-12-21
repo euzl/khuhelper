@@ -33,7 +33,6 @@ public class PredictActivity extends AppCompatActivity implements View.OnClickLi
     Button checkBtn;
 
     String jsonResult;
-    int usage;
     private int carNumber; // 자동차 대수
 
     boolean isResult = false;
@@ -77,8 +76,12 @@ public class PredictActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.btn_check:
                 if(!isResult) {
                     carNumber = Integer.parseInt(numberEdt.getText().toString());
-//                    getResponse();
-                    showResult(usage);
+
+                    // 키보드 내리기
+                    InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
+                    getResponse();
                 } else {
                     finish();
                 }
@@ -86,35 +89,9 @@ public class PredictActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    private void setJsonResult(String jsonResult) {
-        usage = Integer.parseInt(jsonResult);
-    }
-
     /**
      * 동찬 결과 보여주는 함수
      */
-    private void showResult(int result) {
-        // 키보드 내리기
-        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-
-        numberEdt.setVisibility(View.GONE);
-
-        StringBuilder notiMessage = new StringBuilder()
-                .append("분석결과 자동차가 ")
-                .append(carNumber)
-                .append(" 대일 때\n예상 전기량은 다음과 같습니다.");
-        predictNotiTv.setText(notiMessage);
-
-        int a = 0;
-        if (carNumber >10000) a = 29880;
-        else a = 734;
-        resultTv.setText(a + ""); // 임시
-        unitTv.setVisibility(View.VISIBLE);
-
-        isResult = true;
-    }
-
     private void getResponse() {
         jsonResult = null;
 
@@ -132,26 +109,30 @@ public class PredictActivity extends AppCompatActivity implements View.OnClickLi
                         .build();
                 try {
                     Response response = client.newCall(request).execute();
-
-
                     final JSONObject jsonObject  = new JSONObject(response.body().string());
-                    Log.d("please:", jsonObject + "");
-
                     jsonResult = jsonObject.getString("predicted_value");
                     Log.d("json result", jsonResult + "");
+
+                    // edt gone
+                    numberEdt.setVisibility(View.GONE);
+
+                    // show result
+                    StringBuilder notiMessage = new StringBuilder()
+                            .append("분석결과 자동차가 ")
+                            .append(carNumber)
+                            .append(" 대일 때\n예상 전기량은 다음과 같습니다.");
+                    predictNotiTv.setText(notiMessage);
+
+                    resultTv.setText(jsonResult + ""); // 예상 자동차 대수 표시
+                    unitTv.setVisibility(View.VISIBLE);
+
+                    isResult = true;
 
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
             }
         }.start();
-
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                setJsonResult(jsonResult);
-            }
-        });
     }
 
     public void finish() {
