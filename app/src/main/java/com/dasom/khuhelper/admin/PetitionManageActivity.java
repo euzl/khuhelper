@@ -49,8 +49,12 @@ public class PetitionManageActivity extends AppCompatActivity implements View.On
 
         linearLayoutManager = new LinearLayoutManager(this);
         petitionAdapter = new PetitionAdapter(this, petitionList);
+    }
 
-        // TODO: 04/09/2020 비동기로 리스트 다 가져온 다음에 실행하기
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         // data가 있을 때(확인 안했을 경우만) / 없을 때
         if (openData()) {
             manageNotiTv.setVisibility(View.GONE);
@@ -60,12 +64,6 @@ public class PetitionManageActivity extends AppCompatActivity implements View.On
             recyclerView.setVisibility(View.GONE);
             manageNotiTv.setVisibility(View.VISIBLE);
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // TODO: 07/09/2020 민원확인하면 바로 파란색글씨로 변하도록
     }
 
     @Override
@@ -85,6 +83,8 @@ public class PetitionManageActivity extends AppCompatActivity implements View.On
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                petitionList.clear();
+
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Petition petition = data.getValue(Petition.class);
                     petition.setKey(data.getKey());
