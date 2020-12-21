@@ -179,12 +179,11 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/btn_height_size"
         android:layout_margin="@dimen/btn_margin_size"
-        android:background="@drawable/bg_button"
+        android:background="@drawable/bg_button_ripple"
         android:gravity="center"
         android:text="@string/cp_receipt_btn"
         android:textColor="@color/white"
         android:textSize="@dimen/btn_font_size"
-        android:foreground="?android:selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

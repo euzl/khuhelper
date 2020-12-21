@@ -1,7 +1,6 @@
 package com.dasom.khuhelper.admin;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -12,14 +11,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dasom.khuhelper.Petition;
 import com.dasom.khuhelper.R;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.dasom.khuhelper.petition.Petition;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ReplyActivity extends AppCompatActivity implements View.OnClickListener {
+public class PetitionReplyActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button replySubmitBtn;
     ImageView backBtn;
@@ -34,7 +36,7 @@ public class ReplyActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_petition);
+        setContentView(R.layout.activity_petitionreply);
 
         // 데이터 수신
         Intent intent = getIntent();
@@ -50,6 +52,7 @@ public class ReplyActivity extends AppCompatActivity implements View.OnClickList
         if (petition.isCheck()) {
             petitionTv.setText("처리된 민원 확인");
             replyEdt.setVisibility(View.GONE);
+            // TODO: 07/09/2020 응답 작성한 것도 표시되도록
         } else {
             petitionTv.setText("처리되지 않은 민원 확인");
             // 응답기능
@@ -75,6 +78,7 @@ public class ReplyActivity extends AppCompatActivity implements View.OnClickList
         titleTv = findViewById(R.id.tv_title);
         contentTv = findViewById(R.id.tv_content);
 
+        replySubmitBtn.setText("민원확인");
         replySubmitBtn.setOnClickListener(this);
         backBtn.setOnClickListener(this);
 
@@ -100,22 +104,17 @@ public class ReplyActivity extends AppCompatActivity implements View.OnClickList
         // TODO: 14/07/2020 DB에 관련 내용들이 저장되도록 구현
         petition.setCheck(true);
         petition.setReply(replyEdt.getText().toString());
-        saveData();
+        saveFirebase();
 
         Toast.makeText(this.getApplicationContext(),"민원이 처리되었습니다.", Toast.LENGTH_SHORT).show();
         finish();
     }
 
-    private void saveData() {
-        // Gson 인스턴스 생성
-        Gson gson = new GsonBuilder().create();
-        // JSON 으로 변환
-        String strPetition = gson.toJson(petition, Petition.class);
+    private void saveFirebase() {
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
 
-        // sharedpreference에 저장
-        SharedPreferences sp = getSharedPreferences("shared", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString("petition", strPetition);
-        editor.commit();
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/petition/" + petition.getKey(), petition);
+        database.updateChildren(childUpdates);
     }
 }

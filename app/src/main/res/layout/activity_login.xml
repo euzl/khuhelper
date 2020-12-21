@@ -27,12 +27,11 @@
         android:layout_width="@dimen/btn_login_width_size"
         android:layout_height="66dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/bg_loginbutton"
+        android:background="@drawable/bg_loginbutton_ripple"
         android:gravity="center"
         android:text="@string/user_login"
         android:textColor="@color/white"
         android:textSize="@dimen/btn_font_size"
-        android:foreground="?android:selectableItemBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_login" />

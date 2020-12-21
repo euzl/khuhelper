@@ -1,7 +1,6 @@
 package com.dasom.khuhelper.user;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -12,15 +11,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dasom.khuhelper.Petition;
+import com.dasom.khuhelper.petition.Petition;
 import com.dasom.khuhelper.R;
 import com.dasom.khuhelper.user.map.ChargingStation;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class PetitionActivity extends AppCompatActivity implements View.OnClickListener {
+public class PetitionApplyActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView nameTv;
     Button petitionSubmitBtn;
@@ -36,7 +35,7 @@ public class PetitionActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_petition);
+        setContentView(R.layout.activity_petitionapply);
 
         // 데이터 수신
         Intent intent = getIntent();
@@ -88,26 +87,18 @@ public class PetitionActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void submitPetition() {
-        // TODO: 14/07/2020 DB에 관련 내용들이 저장되도록 구현
+        // TODO: 04/09/2020 테스트끝나면 기존 saveData() 삭제 
         petition = new Petition(usernameEdt.getText().toString(), useremailEdt.getText().toString(),
                 titleEdt.getText().toString(), contentEdt.getText().toString(),
                 chargingStation.getStatId(), chargingStation.getStatNm());
-        saveData();
+        saveFirebase();
 
         Toast.makeText(this.getApplicationContext(),R.string.cp_submit_success, Toast.LENGTH_SHORT).show();
         finish();
     }
 
-    private void saveData() {
-        // Gson 인스턴스 생성
-        Gson gson = new GsonBuilder().create();
-        // JSON 으로 변환
-        String strPetition = gson.toJson(petition, Petition.class);
-
-        // sharedpreference에 저장
-        SharedPreferences sp = getSharedPreferences("shared", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString("petition", strPetition);
-        editor.commit();
+    private void saveFirebase() {
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        database.child("petition").push().setValue(petition);
     }
 }

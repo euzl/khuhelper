@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "372208349704",
+    "firebase_url": "https://khuhelper.firebaseio.com",
+    "project_id": "khuhelper",
+    "storage_bucket": "khuhelper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:372208349704:android:8221e501028b88330157bd",
+        "android_client_info": {
+          "package_name": "com.dasom.khuhelper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "372208349704-lkbv8phs34dua3dok8t68gqqb9lrrdek.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dasom.khuhelper",
+            "certificate_hash": "696ed5d0aa8ed589ade9fa88a41dcb351fa193cf"
+          }
+        },
+        {
+          "client_id": "372208349704-as3mlogc5782ehccdhkfa9lon4codbl9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBU5DkRufVSrRwQJpk_AZr8mlxtPLHtgic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "372208349704-as3mlogc5782ehccdhkfa9lon4codbl9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
