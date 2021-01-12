@@ -1,6 +1,7 @@
 package com.dasom.khuhelper.admin;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -32,10 +33,11 @@ public class PredictActivity extends AppCompatActivity implements View.OnClickLi
     EditText numberEdt;
     Button checkBtn;
 
-    String jsonResult;
     private int carNumber; // 자동차 대수
 
     boolean isResult = false;
+
+    Handler handler = new Handler();
 
     InputMethodManager imm;
 
@@ -93,9 +95,11 @@ public class PredictActivity extends AppCompatActivity implements View.OnClickLi
      * 동찬 결과 보여주는 함수
      */
     private void getResponse() {
-        jsonResult = null;
 
-        new Thread() {
+        new Thread(new Runnable() {
+            String jsonResult = "";
+
+            @Override
             public void run() {
                 OkHttpClient client = new OkHttpClient().newBuilder()
                         .build();
@@ -113,26 +117,33 @@ public class PredictActivity extends AppCompatActivity implements View.OnClickLi
                     jsonResult = jsonObject.getString("predicted_value");
                     Log.d("json result", jsonResult + "");
 
-                    // edt gone
-                    numberEdt.setVisibility(View.GONE);
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            // edt gone
+                            numberEdt.setVisibility(View.GONE);
 
-                    // show result
-                    StringBuilder notiMessage = new StringBuilder()
-                            .append("분석결과 자동차가 ")
-                            .append(carNumber)
-                            .append(" 대일 때\n예상 전기량은 다음과 같습니다.");
-                    predictNotiTv.setText(notiMessage);
-
-                    resultTv.setText(jsonResult + ""); // 예상 자동차 대수 표시
-                    unitTv.setVisibility(View.VISIBLE);
+                            // show result
+                            StringBuilder notiMessage = new StringBuilder()
+                                    .append("분석결과 자동차가 ")
+                                    .append(carNumber)
+                                    .append(" 대일 때\n예상 전기량은 다음과 같습니다.");
+                            predictNotiTv.setText(notiMessage);
+                            resultTv.setText(jsonResult); // 예상 자동차 대수 표시
+                            unitTv.setVisibility(View.VISIBLE);
+                        }
+                    });
 
                     isResult = true;
 
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
+
+
+
             }
-        }.start();
+        }).start();
     }
 
     public void finish() {
