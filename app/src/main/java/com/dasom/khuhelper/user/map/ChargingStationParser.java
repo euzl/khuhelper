@@ -67,6 +67,8 @@ public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
             xpp.next();
             eventType = xpp.getEventType();
 
+            int statTag = 0; // 마커표시를 위한 tag
+
             while( eventType != XmlPullParser.END_DOCUMENT ){
                 switch( eventType ){
                     case XmlPullParser.START_DOCUMENT:
@@ -78,6 +80,7 @@ public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
                         if (tag.equals("item")) {
                             ChargingStation cs = setChargingStation();
                             if (cs != null) {
+                                cs.setStatTag(statTag++);
                                 csList.add(cs);
                             }
                         }

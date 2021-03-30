@@ -178,11 +178,10 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
     private void markChargingStation(ArrayList<ChargingStation> chargingStations) {
         MapPOIItem mapPOIItem;
         Log.d("Mark Carging Station", "마커표시시작");
-        int tag=0;
         for (ChargingStation cs : chargingStations) {
             mapPOIItem = new MapPOIItem();
             mapPOIItem.setItemName(cs.getStatNm());
-            mapPOIItem.setTag(tag++);
+            mapPOIItem.setTag(cs.getStatTag());
             mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(cs.getLat(), cs.getLng()));
             mapPOIItem.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
             mapPOIItem.setCustomImageResourceId(R.drawable.ic_ev_place); // 마커 이미지.
