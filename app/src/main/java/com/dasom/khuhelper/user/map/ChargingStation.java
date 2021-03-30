@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class ChargingStation implements Serializable {
 
+    private int statTag; // 마커용 tag (csList index)
     private String statId; // 충전소ID (고유값)
     private String statNm; // 충전소 이름
     private int chgerType; // 충전기 타입
@@ -12,6 +13,14 @@ public class ChargingStation implements Serializable {
     private Float lat; // 위도
     private Float lng; // 경도
     private String useTime; // 이용시간
+
+    public int getStatTag() {
+        return statTag;
+    }
+
+    public void setStatTag(int statTag) {
+        this.statTag = statTag;
+    }
 
     public void setStatId(String statId) {
         this.statId = statId;
