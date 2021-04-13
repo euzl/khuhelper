@@ -67,15 +67,15 @@ public class PlaceActivity extends AppCompatActivity implements View.OnClickList
 
     private void setInformation() {
         nameTv.setText(chargingStation.getStatNm());
-        operTimeTv.setText(chargingStation.getUseTime());
+        operTimeTv.setText("Update : " + chargingStation.getUseTime());
         switch (chargingStation.getChgerType()) {
-            case 01:
+            case 1:
                 batteryTypeTv.setText("DC 차데모");
                 break;
-            case 03:
+            case 2:
                 batteryTypeTv.setText("DC 차데모 + AC 3상");
                 break;
-            case 06:
+            case 6:
                 batteryTypeTv.setText("DC 차데모 + AD 3상 + DC 콤보");
                 break;
         }
