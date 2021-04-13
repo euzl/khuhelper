@@ -159,7 +159,6 @@ public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
                         break;
 
                     case XmlPullParser.END_TAG:
-//                        if(tag.equals("item")) return tmpStation;
                         if (isEndTag) return tmpStation;
                         isEndTag = true;
                 }
