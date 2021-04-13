@@ -29,7 +29,7 @@ public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
         this.cspCallBack = cspCallBack;
         csList = new ArrayList<>();
         queryURL = "http://openapi.kepco.co.kr/service/EvInfoServiceV2/getEvSearchList?"//요청 URL
-                +"serviceKey=" + ServiceKey.key + "&numOfRows=" + 5000;
+                +"serviceKey=" + ServiceKey.key + "&numOfRows=" + 5000 + "&addr=서울특별시";
     }
 
     public ChargingStation findStationByTag(int tag) {
@@ -126,14 +126,14 @@ public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
 
 
                         isEndTag = false;
-                        if (tag.equals("cpTp") || tag.equals("csId") || tag.equals("statUpdatedatetime")) {
+                        if (tag.equals("cpTp") || tag.equals("cpId") || tag.equals("cpNm")) {
                             xpp.next();
                         }
                         else {
-                            if (tag.equals("cpId")) {
+                            if (tag.equals("csId")) {
                                 xpp.next();
                                 tmpStation.setStatId(xpp.getText());
-                            } else if (tag.equals("cpNm")) {
+                            } else if (tag.equals("csNm")) {
                                 xpp.next();
                                 tmpStation.setStatNm(xpp.getText());
                             } else if (tag.equals("chargeTp")) {
@@ -144,9 +144,6 @@ public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
                                 tmpStation.setStat(Integer.parseInt(xpp.getText()));
                             } else if (tag.equals("addr")) {
                                 xpp.next();
-                                if (!xpp.getText().contains("서울특별시")) {
-                                    return null;
-                                }
                                 tmpStation.setAddrDoro(xpp.getText());
                             } else if (tag.equals("lat")) {
                                 xpp.next();
@@ -154,7 +151,7 @@ public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
                             } else if (tag.equals("longi")) {
                                 xpp.next();
                                 tmpStation.setLng(Float.parseFloat(xpp.getText()));
-                            } else if (tag.equals("useTime")) {
+                            } else if (tag.equals("statUpdateDatetime")) {
                                 xpp.next();
                                 tmpStation.setUseTime(xpp.getText());
                             }
