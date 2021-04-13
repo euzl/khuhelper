@@ -156,12 +156,16 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
         mapView.removeAllPOIItems();
-        markChargingStation(chargingStationParser.getStationByName(name));
-        StringBuilder builder = new StringBuilder()
-                .append(name)
-                .append("(와)과 관련된 충전소가 표시되었습니다.");
-        Toast.makeText(UserActivity.this, builder, Toast.LENGTH_SHORT).show();
-        mapView.fitMapViewAreaToShowAllPOIItems();
+        if (markChargingStation(chargingStationParser.getStationByName(name))) {
+            StringBuilder builder = new StringBuilder()
+                    .append(name)
+                    .append("(와)과 관련된 충전소가 표시되었습니다.");
+            Toast.makeText(UserActivity.this, builder, Toast.LENGTH_SHORT).show();
+            mapView.fitMapViewAreaToShowAllPOIItems();
+        } else {
+            Toast.makeText(UserActivity.this, "검색 결과가 없습니다.", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void parseChargingStation() {
@@ -175,7 +179,8 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         chargingStationParser.execute();
     }
 
-    private void markChargingStation(ArrayList<ChargingStation> chargingStations) {
+    private boolean markChargingStation(ArrayList<ChargingStation> chargingStations) {
+        if (chargingStations.size() == 0) return false;
         MapPOIItem mapPOIItem;
         Log.d("Mark Carging Station", "마커표시시작");
         for (ChargingStation cs : chargingStations) {
@@ -189,5 +194,6 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
             mapPOIItem.setCustomImageAnchor(0.5f, 1.0f); // 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
             mapView.addPOIItem(mapPOIItem);
         }
+        return true;
     }
 }
