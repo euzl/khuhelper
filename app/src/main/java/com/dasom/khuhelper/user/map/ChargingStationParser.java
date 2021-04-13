@@ -28,8 +28,8 @@ public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
     public ChargingStationParser(ChargingStationParserCallBack cspCallBack) {
         this.cspCallBack = cspCallBack;
         csList = new ArrayList<>();
-        queryURL = "http://open.ev.or.kr:8080/openapi/services/rest/EvChargerService?"//요청 URL
-                +"serviceKey=" + ServiceKey.key;
+        queryURL = "http://openapi.kepco.co.kr/service/EvInfoServiceV2/getEvSearchList?"//요청 URL
+                +"serviceKey=" + ServiceKey.key + "&numOfRows=" + 5000 + "&addr=서울특별시";
     }
 
     public ChargingStation findStationByTag(int tag) {
@@ -122,45 +122,40 @@ public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
                         break;
 
                     case XmlPullParser.START_TAG:
-                        isEndTag = false;
                         tag = xpp.getName(); //태그 이름 얻어오기
 
-                        if(tag.equals("statId")){
-                            xpp.next();
-                            tmpStation.setStatId(xpp.getText());
-                        }
-                        else if(tag.equals("statNm")){
-                            xpp.next();
-                            tmpStation.setStatNm(xpp.getText());
-                        }
-                        else if(tag.equals("chgerType")){
-                            xpp.next();
-                            tmpStation.setChgerType(Integer.parseInt(xpp.getText()));
-                        }
-                        else if(tag.equals("stat")){
-                            xpp.next();
-                            tmpStation.setStat(Integer.parseInt(xpp.getText()));
-                        }
-                        else if(tag.equals("addrDoro")){
-                            xpp.next();
-                            if(!xpp.getText().contains("서울특별시")) {
-                                return null;
-                            }
-                            tmpStation.setAddrDoro(xpp.getText());
-                        }
-                        else if(tag.equals("lat")){
-                            xpp.next();
-                            tmpStation.setLat(Float.parseFloat(xpp.getText()));
-                        }
-                        else if(tag.equals("lng")){
-                            xpp.next();
-                            tmpStation.setLng(Float.parseFloat(xpp.getText()));
-                        }
-                        else if(tag.equals("useTime")){
-                            xpp.next();
-                            tmpStation.setUseTime(xpp.getText());
-                        }
 
+                        isEndTag = false;
+                        if (tag.equals("cpTp") || tag.equals("cpId") || tag.equals("cpNm")) {
+                            xpp.next();
+                        }
+                        else {
+                            if (tag.equals("csId")) {
+                                xpp.next();
+                                tmpStation.setStatId(xpp.getText());
+                            } else if (tag.equals("csNm")) {
+                                xpp.next();
+                                tmpStation.setStatNm(xpp.getText());
+                            } else if (tag.equals("chargeTp")) {
+                                xpp.next();
+                                tmpStation.setChgerType(Integer.parseInt(xpp.getText()));
+                            } else if (tag.equals("cpStat")) {
+                                xpp.next();
+                                tmpStation.setStat(Integer.parseInt(xpp.getText()));
+                            } else if (tag.equals("addr")) {
+                                xpp.next();
+                                tmpStation.setAddrDoro(xpp.getText());
+                            } else if (tag.equals("lat")) {
+                                xpp.next();
+                                tmpStation.setLat(Float.parseFloat(xpp.getText()));
+                            } else if (tag.equals("longi")) {
+                                xpp.next();
+                                tmpStation.setLng(Float.parseFloat(xpp.getText()));
+                            } else if (tag.equals("statUpdateDatetime")) {
+                                xpp.next();
+                                tmpStation.setUseTime(xpp.getText());
+                            }
+                        }
                         break;
 
                     case XmlPullParser.END_TAG:
