@@ -156,7 +156,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
         mapView.removeAllPOIItems();
-        if (markChargingStation(chargingStationParser.getStationByName(name))) {
+        if (markChargingStation(chargingStationParser.getStationsByName(name))) {
             StringBuilder builder = new StringBuilder()
                     .append(name)
                     .append("(와)과 관련된 충전소가 표시되었습니다.");
@@ -172,8 +172,8 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         // 충전소 파서 실행 (AsyncTask)
         chargingStationParser = new ChargingStationParser(new ChargingStationParserCallBack() {
             @Override
-            public void onSuccess(ArrayList<ChargingStation> chargingStations) {
-                markChargingStation(chargingStations);
+            public void onSuccess(ChargingStation chargingStation) {
+                markChargingStation(chargingStation);
             }
         });
         chargingStationParser.execute();
@@ -181,19 +181,26 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
 
     private boolean markChargingStation(ArrayList<ChargingStation> chargingStations) {
         if (chargingStations.size() == 0) return false;
-        MapPOIItem mapPOIItem;
         Log.d("Mark Carging Station", "마커표시시작");
+        boolean isSuccess = false;
         for (ChargingStation cs : chargingStations) {
-            mapPOIItem = new MapPOIItem();
-            mapPOIItem.setItemName(cs.getStatNm());
-            mapPOIItem.setTag(cs.getStatTag());
-            mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(cs.getLat(), cs.getLng()));
-            mapPOIItem.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
-            mapPOIItem.setCustomImageResourceId(R.drawable.ic_ev_place); // 마커 이미지.
-            mapPOIItem.setCustomImageAutoscale(false); // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
-            mapPOIItem.setCustomImageAnchor(0.5f, 1.0f); // 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
-            mapView.addPOIItem(mapPOIItem);
+            isSuccess = markChargingStation(cs);
         }
+        return isSuccess;
+    }
+
+    private boolean markChargingStation(ChargingStation cs) {
+        MapPOIItem mapPOIItem;
+        Log.d("Mark Carging Station", "마커표시");
+        mapPOIItem = new MapPOIItem();
+        mapPOIItem.setItemName(cs.getStatNm());
+        mapPOIItem.setTag(cs.getStatTag());
+        mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(cs.getLat(), cs.getLng()));
+        mapPOIItem.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
+        mapPOIItem.setCustomImageResourceId(R.drawable.ic_ev_place); // 마커 이미지.
+        mapPOIItem.setCustomImageAutoscale(false); // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
+        mapPOIItem.setCustomImageAnchor(0.5f, 1.0f); // 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
+        mapView.addPOIItem(mapPOIItem);
         return true;
     }
 }

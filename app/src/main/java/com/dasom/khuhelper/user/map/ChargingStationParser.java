@@ -30,6 +30,7 @@ public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
         csList = new ArrayList<>();
         queryURL = "http://openapi.kepco.co.kr/service/EvInfoServiceV2/getEvSearchList?"//요청 URL
                 +"serviceKey=" + ServiceKey.key + "&numOfRows=" + 5000 + "&addr=서울특별시";
+        // TODO: 2021/09/05 화면에 보이는 영역만 충전소 위치 받아서 표시 (클러스터링까지 되면 좋겠다)
     }
 
     public ChargingStation findStationByTag(int tag) {
@@ -42,7 +43,7 @@ public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
      * @param name
      * @return
      */
-    public ArrayList<ChargingStation> getStationByName(String name) {
+    public ArrayList<ChargingStation> getStationsByName(String name) {
         ArrayList<ChargingStation> findList = new ArrayList<>();
 
         for (ChargingStation cs : csList) {
@@ -82,6 +83,7 @@ public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
                             if (cs != null) {
                                 cs.setStatTag(statTag++);
                                 csList.add(cs);
+                                cspCallBack.onSuccess(cs); // 마커표시
                             }
                         }
                         break;
@@ -107,7 +109,7 @@ public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void vd) {
         super.onPostExecute(vd);
-        cspCallBack.onSuccess(csList);
+        Log.d("Parser", "onPostExecute");
     }
 
     private ChargingStation setChargingStation() {
