@@ -26,3 +26,8 @@
 |--|--|--|--|--|
 |![image](https://user-images.githubusercontent.com/37680108/102805929-53685500-43ff-11eb-8287-0b5e3d2dfd87.png)|![image](https://user-images.githubusercontent.com/37680108/102805944-582d0900-43ff-11eb-838d-cc279a6f15f3.png)|![image](https://user-images.githubusercontent.com/37680108/102805965-5ebb8080-43ff-11eb-9792-4c1f73337dae.png)|![image](https://user-images.githubusercontent.com/37680108/102805974-63803480-43ff-11eb-814a-342a94db59fe.png)|![image](https://user-images.githubusercontent.com/37680108/102805993-6aa74280-43ff-11eb-8d7f-e379a8101e68.png)|
 
+## 기술스택
+- Android Client  
+`JAVA`, `Kakao MAP API`, `Async Task`, `RecyclerView`, `gitflow`, `Callback Pattern`
+- Server  
+`Firebase Realtime DB`, `공공데이터 API`
