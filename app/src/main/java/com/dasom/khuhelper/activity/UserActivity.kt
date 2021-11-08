@@ -70,7 +70,7 @@ class UserActivity : AppCompatActivity() {
             startActivity(
                 Intent(
                     this@UserActivity,
-                    PetitionComfirmActivity::class.java
+                    PetitionConfirmActivity::class.java
                 )
             )
         }
