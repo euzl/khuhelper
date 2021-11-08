@@ -1,6 +1,7 @@
 package com.dasom.khuhelper.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,14 +14,16 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import java.util.ArrayList
 
+private const val TAG = "PetitionListActivity"
 open class PetitionListActivity : AppCompatActivity() {
     lateinit var binding: ActivityPetitionListBinding
 
     lateinit var petitionAdapter: PetitionAdapter
-//    var petitionList = ArrayList<Petition>()
+    var petitionList = ArrayList<Petition>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "onCreate: ")
         binding = ActivityPetitionListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -29,7 +32,8 @@ open class PetitionListActivity : AppCompatActivity() {
     }
 
     open fun initView() {
-        petitionAdapter = PetitionAdapter(this, ArrayList())
+        Log.d(TAG, "initView: ")
+        petitionAdapter = PetitionAdapter(this, petitionList)
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(this@PetitionListActivity)
             adapter = petitionAdapter
@@ -43,11 +47,15 @@ open class PetitionListActivity : AppCompatActivity() {
     }
 
     override fun onStart() {
+        Log.d(TAG, "onStart: ")
         super.onStart()
 
         openData()
+    }
 
-        if (petitionAdapter.petitionArrayList?.isEmpty() == true) {
+    fun updateView() {
+        Log.d(TAG, "updateView: ${petitionAdapter.petitionArrayList}")
+        if (petitionAdapter.petitionArrayList.isNullOrEmpty()) {
             binding.recyclerView.visibility = View.GONE
             binding.notiTextView.visibility = View.VISIBLE
         } else {
@@ -59,6 +67,7 @@ open class PetitionListActivity : AppCompatActivity() {
     }
 
     private fun openData() {
+        Log.d(TAG, "openData: ")
         // TODO: 04/09/2020 petition 리스트 비동기로 불러오기
         val dbRef = FirebaseDatabase.getInstance().reference.child("petition")
 
@@ -73,8 +82,13 @@ open class PetitionListActivity : AppCompatActivity() {
                     list.add(petition)
                 }
 
+                Log.d(TAG, "onDataChange: ${list.size}")
+
                 petitionAdapter.petitionArrayList = list
+                Log.d(TAG, "onDataChange: ${petitionAdapter.petitionArrayList!!.size}")
                 petitionAdapter.notifyDataSetChanged()
+
+                updateView()
             }
 
             override fun onCancelled(databaseError: DatabaseError) {}

@@ -34,6 +34,7 @@ class UserActivity : AppCompatActivity() {
         binding = ActivityUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initView()
+        setListener()
         parseChargingStation() // 충전소 api 파싱
     }
 

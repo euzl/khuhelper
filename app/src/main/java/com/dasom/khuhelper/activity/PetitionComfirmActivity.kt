@@ -14,6 +14,7 @@ import java.util.*
 
 class PetitionComfirmActivity : PetitionListActivity() {
     override fun initView() {
+        super.initView()
         binding.listTitleTextView.text = "민원확인"
     }
 }
