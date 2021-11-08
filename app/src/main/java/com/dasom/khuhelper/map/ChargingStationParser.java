@@ -1,4 +1,4 @@
-package com.dasom.khuhelper.user.map;
+package com.dasom.khuhelper.map;
 
 import android.os.AsyncTask;
 import android.util.Log;

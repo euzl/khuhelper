@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/btn_search_back"
+            android:id="@+id/searchBackButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:padding="@dimen/btn_back_padding_size"
@@ -25,7 +25,7 @@
             tools:ignore="VectorDrawableCompat" />
 
         <TextView
-            android:id="@+id/tv_petition"
+            android:id="@+id/petitionTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="민원 확인"
@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@id/layout_predict_top" />
 
     <TextView
-        android:id="@+id/tv_user"
+        android:id="@+id/userTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/detail_line_margin_size"
@@ -68,13 +68,13 @@
         android:layout_centerInParent="true"
         android:layout_margin="@dimen/detail_line_margin_size"
         android:background="@color/lightGray"
-        app:layout_constraintBottom_toTopOf="@+id/tv_place"
+        app:layout_constraintBottom_toTopOf="@+id/placeTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_user" />
+        app:layout_constraintTop_toBottomOf="@+id/userTextView" />
 
     <TextView
-        android:id="@+id/tv_place"
+        android:id="@+id/placeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="배터리타입"
@@ -83,7 +83,7 @@
         app:layout_constraintBottom_toTopOf="@+id/line3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_user"
+        app:layout_constraintStart_toStartOf="@+id/userTextView"
         app:layout_constraintTop_toBottomOf="@+id/line1" />
 
     <View
@@ -93,13 +93,13 @@
         android:layout_centerInParent="true"
         android:layout_margin="@dimen/detail_line_margin_size"
         android:background="@color/lightGray"
-        app:layout_constraintBottom_toTopOf="@+id/tv_title"
+        app:layout_constraintBottom_toTopOf="@+id/titleTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_place" />
+        app:layout_constraintTop_toBottomOf="@+id/placeTextView" />
 
     <TextView
-        android:id="@+id/tv_title"
+        android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="정보없음"
@@ -108,7 +108,7 @@
         app:layout_constraintBottom_toTopOf="@+id/line4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_place"
+        app:layout_constraintStart_toStartOf="@+id/placeTextView"
         app:layout_constraintTop_toBottomOf="@+id/line3" />
 
     <View
@@ -119,13 +119,13 @@
         android:layout_margin="@dimen/detail_line_margin_size"
         android:layout_marginBottom="1dp"
         android:background="@color/lightGray"
-        app:layout_constraintBottom_toTopOf="@+id/tv_content"
+        app:layout_constraintBottom_toTopOf="@+id/contentTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
 
     <TextView
-        android:id="@+id/tv_content"
+        android:id="@+id/contentTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="정보없음"
@@ -134,7 +134,7 @@
         app:layout_constraintBottom_toTopOf="@+id/line5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_title"
+        app:layout_constraintStart_toStartOf="@+id/titleTextView"
         app:layout_constraintTop_toBottomOf="@+id/line4" />
 
     <View
@@ -144,13 +144,13 @@
         android:layout_centerInParent="true"
         android:layout_margin="@dimen/detail_line_margin_size"
         android:background="@color/lightGray"
-        app:layout_constraintBottom_toTopOf="@+id/edt_reply"
+        app:layout_constraintBottom_toTopOf="@+id/replyEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_content" />
+        app:layout_constraintTop_toBottomOf="@+id/contentTextView" />
 
     <EditText
-        android:id="@+id/edt_reply"
+        android:id="@+id/replyEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/detail_line_margin_size"
@@ -171,11 +171,11 @@
         android:background="@color/lightGray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_reply" />
+        app:layout_constraintTop_toBottomOf="@+id/replyEditText" />
 
 
     <Button
-        android:id="@+id/btn_reply_apply"
+        android:id="@+id/replyApplyButton"
         android:layout_width="match_parent"
         android:layout_height="@dimen/btn_height_size"
         android:layout_margin="@dimen/btn_margin_size"
