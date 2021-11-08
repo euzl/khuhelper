@@ -83,7 +83,7 @@ public class ChargingStationParser extends AsyncTask<Void, ChargingStation, Void
                             if (cs != null) {
                                 cs.setStatTag(statTag++);
                                 csList.add(cs);
-                                onProgressUpdate(cs);
+                                publishProgress(cs); // onProgressUpdate() 호출
                             }
                         }
                         break;
