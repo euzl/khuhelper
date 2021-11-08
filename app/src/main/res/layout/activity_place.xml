@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/btn_search_back"
+            android:id="@+id/searchBackButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:padding="@dimen/btn_back_padding_size"
@@ -25,7 +25,7 @@
             tools:ignore="VectorDrawableCompat" />
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/nameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="충전소 이름"
@@ -53,12 +53,12 @@
         android:layout_marginLeft="@dimen/detail_icon_left_margin_size"
         android:adjustViewBounds="true"
         android:background="@drawable/ic_oper_time"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_oper_time"
+        app:layout_constraintBottom_toBottomOf="@+id/operTimeTextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_oper_time" />
+        app:layout_constraintTop_toTopOf="@+id/operTimeTextView" />
 
     <TextView
-        android:id="@+id/tv_oper_time"
+        android:id="@+id/operTimeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/detail_line_margin_size"
@@ -80,23 +80,23 @@
         android:layout_centerInParent="true"
         android:layout_margin="@dimen/detail_line_margin_size"
         android:background="@color/lightGray"
-        app:layout_constraintBottom_toTopOf="@+id/tv_battery_type"
+        app:layout_constraintBottom_toTopOf="@+id/batteryTypeTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_oper_time" />
+        app:layout_constraintTop_toBottomOf="@+id/operTimeTextView" />
 
     <ImageView
         android:id="@+id/iv_battery_type"
         android:layout_width="20dp"
         android:layout_height="30dp"
         android:background="@drawable/ic_battery_type"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_battery_type"
+        app:layout_constraintBottom_toBottomOf="@+id/batteryTypeTextView"
         app:layout_constraintEnd_toEndOf="@+id/iv_oper_time"
         app:layout_constraintStart_toStartOf="@+id/iv_oper_time"
-        app:layout_constraintTop_toTopOf="@+id/tv_battery_type" />
+        app:layout_constraintTop_toTopOf="@+id/batteryTypeTextView" />
 
     <TextView
-        android:id="@+id/tv_battery_type"
+        android:id="@+id/batteryTypeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="배터리타입"
@@ -105,7 +105,7 @@
         app:layout_constraintBottom_toTopOf="@+id/line3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_oper_time"
+        app:layout_constraintStart_toStartOf="@+id/operTimeTextView"
         app:layout_constraintTop_toBottomOf="@+id/line1" />
 
     <View
@@ -115,23 +115,23 @@
         android:layout_centerInParent="true"
         android:layout_margin="@dimen/detail_line_margin_size"
         android:background="@color/lightGray"
-        app:layout_constraintBottom_toTopOf="@+id/tv_address"
+        app:layout_constraintBottom_toTopOf="@+id/addressTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_battery_type" />
+        app:layout_constraintTop_toBottomOf="@+id/batteryTypeTextView" />
 
     <ImageView
         android:id="@+id/iv_address"
         android:layout_width="20dp"
         android:layout_height="24dp"
         android:background="@drawable/ic_address"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_address"
+        app:layout_constraintBottom_toBottomOf="@+id/addressTextView"
         app:layout_constraintEnd_toEndOf="@+id/iv_battery_type"
         app:layout_constraintStart_toStartOf="@+id/iv_battery_type"
-        app:layout_constraintTop_toTopOf="@+id/tv_address" />
+        app:layout_constraintTop_toTopOf="@+id/addressTextView" />
 
     <TextView
-        android:id="@+id/tv_address"
+        android:id="@+id/addressTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="정보없음"
@@ -140,7 +140,7 @@
         app:layout_constraintBottom_toTopOf="@+id/line4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_battery_type"
+        app:layout_constraintStart_toStartOf="@+id/batteryTypeTextView"
         app:layout_constraintTop_toBottomOf="@+id/line3" />
 
     <View
@@ -151,10 +151,10 @@
         android:layout_margin="@dimen/detail_line_margin_size"
         android:layout_marginBottom="1dp"
         android:background="@color/lightGray"
-        app:layout_constraintBottom_toTopOf="@+id/tv_extra_info"
+        app:layout_constraintBottom_toTopOf="@+id/extraInfoTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_address" />
+        app:layout_constraintTop_toBottomOf="@+id/addressTextView" />
 
 
     <ImageView
@@ -162,13 +162,13 @@
         android:layout_width="@dimen/detail_icon_width_size"
         android:layout_height="@dimen/detail_icon_width_size"
         android:background="@drawable/ic_extra_info"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_extra_info"
+        app:layout_constraintBottom_toBottomOf="@+id/extraInfoTextView"
         app:layout_constraintEnd_toEndOf="@+id/iv_address"
         app:layout_constraintStart_toStartOf="@+id/iv_address"
-        app:layout_constraintTop_toTopOf="@+id/tv_extra_info" />
+        app:layout_constraintTop_toTopOf="@+id/extraInfoTextView" />
 
     <TextView
-        android:id="@+id/tv_extra_info"
+        android:id="@+id/extraInfoTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="정보없음"
@@ -177,7 +177,7 @@
         app:layout_constraintBottom_toTopOf="@+id/line5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_address"
+        app:layout_constraintStart_toStartOf="@+id/addressTextView"
         app:layout_constraintTop_toBottomOf="@+id/line4" />
 
     <View
@@ -187,14 +187,14 @@
         android:layout_centerInParent="true"
         android:layout_margin="@dimen/detail_line_margin_size"
         android:background="@color/lightGray"
-        app:layout_constraintBottom_toTopOf="@+id/tv_extra_info"
+        app:layout_constraintBottom_toTopOf="@+id/extraInfoTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_extra_info" />
+        app:layout_constraintTop_toBottomOf="@+id/extraInfoTextView" />
 
 
     <Button
-        android:id="@+id/btn_petition_apply"
+        android:id="@+id/petitionApplyButton"
         android:layout_width="match_parent"
         android:layout_height="@dimen/btn_height_size"
         android:layout_margin="@dimen/btn_margin_size"

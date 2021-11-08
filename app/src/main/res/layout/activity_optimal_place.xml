@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/btn_optimal_back"
+            android:id="@+id/backBtn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:padding="@dimen/btn_back_padding_size"
@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@id/layout_optimalplace_top" />
 
     <RelativeLayout
-        android:id="@+id/map_view"
+        android:id="@+id/mapViewContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -54,13 +54,13 @@
         app:layout_constraintTop_toBottomOf="@id/view" />
 
     <LinearLayout
-        android:id="@+id/layout_all"
+        android:id="@+id/allButton"
         android:layout_width="0dp"
         android:layout_height="28dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/bg_whitebutton_ripple"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toStartOf="@+id/layout_red"
+        app:layout_constraintEnd_toStartOf="@+id/redButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/view"
         app:layout_constraintWidth_percent="0.15">
@@ -75,15 +75,15 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_red"
+        android:id="@+id/redButton"
         android:layout_width="0dp"
         android:layout_height="28dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/bg_whitebutton_ripple"
         android:orientation="horizontal"
         android:gravity="center"
-        app:layout_constraintEnd_toStartOf="@+id/layout_orange"
-        app:layout_constraintStart_toEndOf="@id/layout_all"
+        app:layout_constraintEnd_toStartOf="@+id/orangeButton"
+        app:layout_constraintStart_toEndOf="@id/allButton"
         app:layout_constraintTop_toBottomOf="@id/view"
         app:layout_constraintWidth_percent="0.15">
 
@@ -103,15 +103,15 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_orange"
+        android:id="@+id/orangeButton"
         android:layout_width="0dp"
         android:layout_height="28dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/bg_whitebutton_ripple"
         android:orientation="horizontal"
         android:gravity="center"
-        app:layout_constraintEnd_toStartOf="@+id/layout_yellow"
-        app:layout_constraintStart_toEndOf="@id/layout_red"
+        app:layout_constraintEnd_toStartOf="@+id/yellowButton"
+        app:layout_constraintStart_toEndOf="@id/redButton"
         app:layout_constraintTop_toBottomOf="@id/view"
         app:layout_constraintWidth_percent="0.15">
 
@@ -130,7 +130,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_yellow"
+        android:id="@+id/yellowButton"
         android:layout_width="0dp"
         android:layout_height="28dp"
         android:layout_marginTop="5dp"
@@ -139,8 +139,8 @@
         android:background="@drawable/bg_whitebutton_ripple"
         android:orientation="horizontal"
         android:gravity="center"
-        app:layout_constraintEnd_toStartOf="@+id/layout_green"
-        app:layout_constraintStart_toEndOf="@id/layout_orange"
+        app:layout_constraintEnd_toStartOf="@+id/greenButton"
+        app:layout_constraintStart_toEndOf="@id/orangeButton"
         app:layout_constraintTop_toBottomOf="@id/view"
         app:layout_constraintWidth_percent="0.15">
 
@@ -160,7 +160,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_green"
+        android:id="@+id/greenButton"
         android:layout_width="0dp"
         android:layout_height="28dp"
         android:layout_marginTop="5dp"
@@ -169,8 +169,8 @@
         android:background="@drawable/bg_whitebutton_ripple"
         android:orientation="horizontal"
         android:gravity="center"
-        app:layout_constraintEnd_toStartOf="@+id/layout_sky"
-        app:layout_constraintStart_toEndOf="@id/layout_yellow"
+        app:layout_constraintEnd_toStartOf="@+id/skyButton"
+        app:layout_constraintStart_toEndOf="@id/yellowButton"
         app:layout_constraintTop_toBottomOf="@id/view"
         app:layout_constraintWidth_percent="0.15">
 
@@ -189,7 +189,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_sky"
+        android:id="@+id/skyButton"
         android:layout_width="0dp"
         android:layout_height="28dp"
         android:orientation="horizontal"
@@ -197,7 +197,7 @@
         android:gravity="center"
         android:background="@drawable/bg_whitebutton_ripple"
         app:layout_constraintWidth_percent="0.15"
-        app:layout_constraintStart_toEndOf="@id/layout_green"
+        app:layout_constraintStart_toEndOf="@id/greenButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/view">
 

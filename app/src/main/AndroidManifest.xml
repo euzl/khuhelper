@@ -14,7 +14,7 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashActivity"
+            android:name=".activity.SplashActivity"
             android:theme="@style/SplashTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,20 +22,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".activity.MainActivity" />
 <!--        User-->
-        <activity android:name=".user.UserActivity" />
-        <activity android:name=".user.PlaceActivity" />
-        <activity android:name=".user.PetitionApplyActivity" />
-        <activity android:name=".user.PetitionComfirmActivity" />
+        <activity android:name=".activity.UserActivity" />
+        <activity android:name=".activity.PlaceActivity" />
+        <activity android:name=".activity.PetitionApplyActivity" />
+        <activity android:name=".activity.PetitionComfirmActivity" />
 
 <!--        Admin-->
-        <activity android:name=".admin.AdminActivity" />
-        <activity android:name=".admin.OptimalPlaceActivity" />
-        <activity android:name=".admin.PredictActivity"
-            android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".admin.PetitionManageActivity" />
-        <activity android:name=".admin.PetitionReplyActivity" />
+        <activity android:name=".activity.AdminActivity" />
+        <activity android:name=".activity.OptimalPlaceActivity" />
+        <activity android:name=".activity.PetitionManageActivity" />
+        <activity android:name=".activity.PetitionReplyActivity" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

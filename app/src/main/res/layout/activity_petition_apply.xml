@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/btn_petition_back"
+            android:id="@+id/petitionBackButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:padding="@dimen/btn_back_padding_size"
@@ -53,12 +53,12 @@
         android:layout_marginLeft="@dimen/petition_icon_left_margin_size"
         android:adjustViewBounds="true"
         android:src="@drawable/ic_ev_place"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_petition_name"
+        app:layout_constraintBottom_toBottomOf="@+id/placeNameTextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_petition_name" />
+        app:layout_constraintTop_toTopOf="@+id/placeNameTextView" />
 
     <TextView
-        android:id="@+id/tv_petition_name"
+        android:id="@+id/placeNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
@@ -73,7 +73,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/edt_petition_user_name"
+        android:id="@+id/userNameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/edt_petition_margin_size"
@@ -83,10 +83,10 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_petition_name" />
+        app:layout_constraintTop_toBottomOf="@+id/placeNameTextView" />
 
     <EditText
-        android:id="@+id/edt_petition_user_email"
+        android:id="@+id/userEmailEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/edt_petition_margin_size"
@@ -96,10 +96,10 @@
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_petition_user_name" />
+        app:layout_constraintTop_toBottomOf="@+id/userNameEditText" />
 
     <EditText
-        android:id="@+id/edt_petition_title"
+        android:id="@+id/titleEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/edt_petition_margin_size"
@@ -109,10 +109,10 @@
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_petition_user_email" />
+        app:layout_constraintTop_toBottomOf="@+id/userEmailEditText" />
 
     <EditText
-        android:id="@+id/edt_petition_content"
+        android:id="@+id/contentEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/edt_petition_margin_top_size"
@@ -123,10 +123,10 @@
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_petition_title" />
+        app:layout_constraintTop_toBottomOf="@+id/titleEditText" />
 
     <Button
-        android:id="@+id/btn_petition_submit"
+        android:id="@+id/submitButton"
         android:layout_width="match_parent"
         android:layout_height="@dimen/btn_height_size"
         android:layout_margin="@dimen/btn_margin_size"
