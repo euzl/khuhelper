@@ -29,10 +29,10 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initView() {
-        firstBtn = findViewById(R.id.btn_menu_1);
-        secondBtn = findViewById(R.id.btn_menu_2);
-        thirdBtn = findViewById(R.id.btn_menu_3);
-        logoutBtn = findViewById(R.id.tv_logout);
+        firstBtn = findViewById(R.id.firstBtn);
+        secondBtn = findViewById(R.id.secondBtn);
+        thirdBtn = findViewById(R.id.thirdBtn);
+        logoutBtn = findViewById(R.id.logoutBtn);
 
         firstBtn.setOnClickListener(this);
         secondBtn.setOnClickListener(this);
@@ -43,16 +43,16 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_menu_1:
+            case R.id.firstBtn:
                 startActivity(new Intent(AdminActivity.this, OptimalPlaceActivity.class));
                 break;
-            case R.id.btn_menu_2:
+            case R.id.secondBtn:
                 startActivity(new Intent(AdminActivity.this, PredictActivity.class));
                 break;
-            case R.id.btn_menu_3:
+            case R.id.thirdBtn:
                 startActivity(new Intent(AdminActivity.this, PetitionManageActivity.class));
                 break;
-            case R.id.tv_logout:
+            case R.id.logoutBtn:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogStyle);
                 builder.setMessage("로그아웃 하시겠습니까?")
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {

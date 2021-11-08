@@ -14,7 +14,7 @@
         android:elevation="10dp"
         android:src="@drawable/ic_adminmenu"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/btn_menu_1"
+        app:layout_constraintStart_toStartOf="@+id/firstBtn"
         app:layout_constraintTop_toTopOf="@+id/textView" />
 
     <TextView
@@ -33,7 +33,7 @@
         app:layout_constraintVertical_bias="0.120000005" />
 
     <Button
-        android:id="@+id/btn_menu_1"
+        android:id="@+id/firstBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_size"
@@ -43,13 +43,13 @@
         android:text="설치 최적지 분석"
         android:textColor="@color/darkGray"
         android:textSize="@dimen/noti_font_size"
-        app:layout_constraintBottom_toTopOf="@+id/btn_menu_2"
+        app:layout_constraintBottom_toTopOf="@+id/secondBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
-        android:id="@+id/btn_menu_2"
+        android:id="@+id/secondBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_menubutton_ripple"
@@ -59,13 +59,13 @@
         android:text="충전소 사용량 예측"
         android:textColor="@color/darkGray"
         android:textSize="@dimen/noti_font_size"
-        app:layout_constraintBottom_toTopOf="@+id/btn_menu_3"
+        app:layout_constraintBottom_toTopOf="@+id/thirdBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_menu_1" />
+        app:layout_constraintTop_toBottomOf="@+id/firstBtn" />
 
     <Button
-        android:id="@+id/btn_menu_3"
+        android:id="@+id/thirdBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/btn_margin_size"
@@ -77,10 +77,10 @@
         android:textSize="@dimen/noti_font_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_menu_2" />
+        app:layout_constraintTop_toBottomOf="@+id/secondBtn" />
 
     <TextView
-        android:id="@+id/tv_logout"
+        android:id="@+id/logoutBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="로그아웃"
