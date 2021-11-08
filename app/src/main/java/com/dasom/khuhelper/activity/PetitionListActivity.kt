@@ -12,7 +12,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import java.util.ArrayList
+import java.util.*
 
 private const val TAG = "PetitionListActivity"
 open class PetitionListActivity : AppCompatActivity() {
@@ -40,7 +40,7 @@ open class PetitionListActivity : AppCompatActivity() {
         }
     }
 
-    fun setListener() {
+    open fun setListener() {
         binding.backButton.setOnClickListener {
             finish()
         }

@@ -15,6 +15,7 @@ class PetitionReplyActivity : AppCompatActivity() {
     lateinit var binding: ActivityPetitionReplyBinding
 
     var petition: Petition? = null
+    var isManage = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,8 +23,9 @@ class PetitionReplyActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // 데이터 수신
-        val intent = intent
         petition = intent.getSerializableExtra("petition") as Petition
+        isManage = intent.getBooleanExtra("isManage", false)
+
         initView()
     }
 
@@ -34,18 +36,26 @@ class PetitionReplyActivity : AppCompatActivity() {
             // TODO: 07/09/2020 응답 작성한 것도 표시되도록
         } else {
             binding.petitionTitleTextView.text = "처리되지 않은 민원 확인"
-            // 응답기능
-            binding.replyEditText.imeOptions = EditorInfo.IME_ACTION_DONE
-            binding.replyEditText.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    submitPetition()
-                    return@OnEditorActionListener true
-                }
-                false
-            })
+
+            if (isManage) {
+                // 응답기능
+                binding.replyEditText.imeOptions = EditorInfo.IME_ACTION_DONE
+                binding.replyEditText.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        submitPetition()
+                        return@OnEditorActionListener true
+                    }
+                    false
+                })
+            } else {
+                binding.replyEditText.visibility = View.GONE
+            }
+
         }
 
-        binding.replyApplyButton.text = "민원확인"
+        if (isManage) binding.replyApplyButton.text = "민원확인"
+        else binding.replyApplyButton.text = "돌아가기"
+
         binding.userTextView.text = "작성자 : " + petition!!.username + " (" + petition!!.useremail + ")"
         binding.placeTextView.text = "충전소 : " + petition!!.csName + " (" + petition!!.csId + ")"
         binding.titleTextView.text = "제목 : " + petition!!.title
@@ -54,7 +64,8 @@ class PetitionReplyActivity : AppCompatActivity() {
 
     fun setListener() {
         binding.replyApplyButton.setOnClickListener {
-            submitPetition()
+            if (isManage) submitPetition()
+            else finish()
         }
         binding.searchBackButton.setOnClickListener {
             finish()

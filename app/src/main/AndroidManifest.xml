@@ -23,6 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.PetitionListActivity" />
+
 <!--        User-->
         <activity android:name=".activity.UserActivity" />
         <activity android:name=".activity.PlaceActivity" />
