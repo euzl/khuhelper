@@ -140,7 +140,7 @@ class UserActivity : AppCompatActivity() {
     private fun parseChargingStation() {
         // 충전소 파서 실행 (AsyncTask)
         chargingStationParser = ChargingStationParser(object : ChargingStationParserCallBack {
-            override fun onSuccess(chargingStation: ChargingStation?) {
+            override fun onProgress(chargingStation: ChargingStation?) {
                 markChargingStation(chargingStation)
             }
         })
