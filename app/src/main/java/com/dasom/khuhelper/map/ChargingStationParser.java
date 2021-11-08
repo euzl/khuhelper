@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
+public class ChargingStationParser extends AsyncTask<Void, ChargingStation, Void> {
 
     private String queryURL;
 
@@ -83,7 +83,7 @@ public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
                             if (cs != null) {
                                 cs.setStatTag(statTag++);
                                 csList.add(cs);
-                                cspCallBack.onSuccess(cs); // 마커표시
+                                onProgressUpdate(cs);
                             }
                         }
                         break;
@@ -104,6 +104,13 @@ public class ChargingStationParser extends AsyncTask<Void, Void, Void> {
         Log.d("Parser", "파싱 끝...");
 
         return null;
+    }
+
+    @Override
+    protected void onProgressUpdate(ChargingStation... cs) {
+        super.onProgressUpdate(cs);
+        Log.d("Parser", "onProgressUpdate: ");
+        cspCallBack.onProgress(cs[0]); // 마커표시
     }
 
     @Override
