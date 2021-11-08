@@ -6,8 +6,8 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.dasom.khuhelper.R
-import com.dasom.khuhelper.dto.AnalyzePlace
 import com.dasom.khuhelper.databinding.ActivityOptimalPlaceBinding
+import com.dasom.khuhelper.dto.AnalyzePlace
 import net.daum.mf.map.api.CalloutBalloonAdapter
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint

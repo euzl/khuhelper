@@ -9,8 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.dasom.khuhelper.R
-import com.dasom.khuhelper.activity.PetitionReplyActivity
-import com.dasom.khuhelper.dto.Petition
 import com.dasom.khuhelper.adapter.PetitionAdapter.PetitionViewHolder
 import com.dasom.khuhelper.dto.Petition
 import java.util.*
